@@ -17,8 +17,9 @@ export const getBackendConfig = () => ({
 })
 
 export const saveBackendConfig = (apiBaseUrl: string, websocketUrl: string) => {
-  localStorage.setItem('ares.apiBaseUrl', apiBaseUrl.trim() || DEFAULT_API)
+  localStorage.setItem('ares.apiBaseUrl', apiBaseUrl.trim().replace(/\/$/, '') || DEFAULT_API)
   localStorage.setItem('ares.websocketUrl', websocketUrl.trim() || DEFAULT_WS)
+  window.dispatchEvent(new Event('ares-config-changed'))
 }
 
 const withTimeout = async (url: string, init: RequestInit, timeoutMs = 1400) => {
@@ -31,15 +32,20 @@ const withTimeout = async (url: string, init: RequestInit, timeoutMs = 1400) => 
   }
 }
 
-const localChat = (message: string): AIResponse => {
+const localChat = (message: string, contextPayload: Record<string, unknown> = {}): AIResponse => {
   const normalized = message.toLowerCase()
-  if (normalized.includes('ecg') || normalized.includes('heart')) return { reply: 'Opening a live ECG scan. Place the three thoracic leads inside the cyan guide rings.', command: { action: 'OPEN_TEST', target: 'ecg' } }
+  if ((normalized.includes('heart') && normalized.includes('history')) || normalized.includes('heart rate trend')) return { reply: 'Opening your heart-rate trend. The 24-hour average is 72 bpm with nominal sinus variability.', command: { action: 'OPEN_VITAL_MODAL', target: 'heartRate', timeframe: normalized.includes('7 day') ? '7d' : '24h' } }
+  if (normalized.includes('ecg') || normalized.includes('electrocardiogram')) return { reply: 'Opening a live ECG scan. Place the three thoracic leads inside the cyan guide rings.', command: { action: 'OPEN_TEST', target: 'ecg' } }
   if (normalized.includes('glucose') || normalized.includes('sugar') || normalized.includes('diabetes')) return { reply: 'Your glucose is 110 mg/dL and holding steady. I am opening the 24-hour glycemic trend.', command: { action: 'OPEN_VITAL_MODAL', target: 'glucose', timeframe: '24h' } }
   if (normalized.includes('arm') || normalized.includes('wound') || normalized.includes('pain')) return { reply: 'I have highlighted the left arm. Follow the zero-G sterile dressing protocol shown beneath the hologram.', command: { action: 'HIGHLIGHT_HOLOGRAM', target: 'left_arm' } }
   if (normalized.includes('chronic') || normalized.includes('radiation') || normalized.includes('hypertension')) return { reply: 'Switching to chronic and radiation monitoring. Current orbital readings remain inside safety margins.', command: { action: 'NAVIGATE_TAB', target: 'chronic' } }
   if (normalized.includes('history') || normalized.includes('log')) return { reply: 'Displaying your medical log and trend viewer.', command: { action: 'NAVIGATE_TAB', target: 'history' } }
+  if (normalized.includes('report') || normalized.includes('x-ray') || normalized.includes('xray')) {
+    const report = typeof contextPayload.uploadedReport === 'string' ? contextPayload.uploadedReport : ''
+    return { reply: report ? `I reviewed the uploaded report in memory: ${report}` : 'I do not have an uploaded report in context yet. Drop a PDF, image, or DICOM file into Evidence Intake first.' }
+  }
   if (normalized.includes('scan') || normalized.includes('exam')) return { reply: 'Running a full-system diagnostic sweep across all available sensors.', command: { action: 'RUN_FULL_SCAN', target: 'all' } }
-  return { reply: 'Flight Surgeon AI online. Primary life-support biometrics are stable. Ask for a test, trend, body region, or full scan.' }
+  return { reply: 'Flight Surgeon AI online. Primary life-support biometrics are stable. Ask for a test, trend, body region, uploaded report, or full scan.' }
 }
 
 export async function sendChatToCustomAI(message: string, contextPayload: Record<string, unknown> = {}): Promise<AIResponse> {
@@ -51,7 +57,7 @@ export async function sendChatToCustomAI(message: string, contextPayload: Record
     if (!response.ok) throw new Error('AI bridge unavailable')
     return await response.json() as AIResponse
   } catch {
-    return localChat(message)
+    return localChat(message, contextPayload)
   }
 }
 
@@ -89,12 +95,24 @@ export async function analyzeHologramRegion(bodyPart: string, view: string) {
   }
 }
 
-export function connectTelemetryWebSocket(onDataReceived: (payload: unknown) => void) {
+export async function testBackendConnection(apiBaseUrl: string) {
+  try {
+    const response = await withTimeout(`${apiBaseUrl.trim().replace(/\/$/, '')}/docs`, { method: 'GET' }, 1800)
+    return response.ok
+  } catch {
+    return false
+  }
+}
+
+export function connectTelemetryWebSocket(onDataReceived: (payload: unknown) => void, onStatus?: (online: boolean) => void) {
   const { websocketUrl } = getBackendConfig()
   try {
     const socket = new WebSocket(websocketUrl)
+    socket.onopen = () => onStatus?.(true)
     socket.onmessage = (event) => { try { onDataReceived(JSON.parse(event.data)) } catch { /* ignore malformed bridge packets */ } }
-    return () => socket.close()
+    socket.onerror = () => { onStatus?.(false); socket.close() }
+    socket.onclose = () => onStatus?.(false)
+    return () => { onStatus?.(false); socket.close() }
   } catch {
     return () => undefined
   }

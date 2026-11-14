@@ -266,11 +266,11 @@ function App() {
         {activeTab === 'health' && <HealthWorkspace range={healthRange} onRangeChange={setHealthRange} />}
         {activeTab === 'chronic' && <ChronicWorkspace />}
         {activeTab === 'history' && <HistoryWorkspace query={historyQuery} onQuery={setHistoryQuery} range={historyRange} onRange={setHistoryRange} rows={filteredLog} onExport={exportLog} />}
+        <ChatPanel messages={chatMessages} value={chatInput} onChange={setChatInput} onSubmit={handleChat} onVoice={startVoice} listening={isListening} onInfo={() => addMessage('assistant', 'Command help: try “Open ECG test”, “Show my heart rate history”, “Check my left arm”, “Show chronic diseases”, or “Run full scan”.', 'system')} />
       </main>
 
       <aside className="right-rail">
         <HologramPanel view={hologramView} layer={hologramLayer} selectedPart={selectedPart} scanning={scanProgress !== null} onView={setHologramView} onLayer={setHologramLayer} onPart={handleHologramPart} onScan={runFullScan} />
-        <ChatPanel messages={chatMessages} value={chatInput} onChange={setChatInput} onSubmit={handleChat} onVoice={startVoice} listening={isListening} onInfo={() => addMessage('assistant', 'Command help: try “Open ECG test”, “Show my heart rate history”, “Check my left arm”, “Show chronic diseases”, or “Run full scan”.', 'system')} />
       </aside>
     </div>
 

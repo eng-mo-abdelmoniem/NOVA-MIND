@@ -38,7 +38,7 @@ Three possible directions were considered:
 
 **Color philosophy:** pale blue-white surfaces create the trust and cleanliness of a clinical console while indigo telemetry bands anchor the spacecraft context. Blue is the signature navigation and data color, amber marks watch conditions, green confirms safe readings, and crimson is reserved for critical states.
 
-**Layout paradigm:** a three-zone medical workstation with a narrow rounded command rail on the left, a bright six-column diagnostic work surface in the center, and a vertical hologram/chat stack on the right. The indigo footer telemetry strip acts as a persistent instrument bus.
+**Layout paradigm:** a three-zone medical workstation with a narrow rounded command rail on the left, a bright six-column diagnostic work surface in the center followed immediately by the Flight Surgeon conversation dock, and a dedicated vertical hologram/scan tower on the right. The indigo footer telemetry strip acts as a persistent instrument bus.
 
 **Signature elements:** rounded white diagnostic cards with restrained colored signal marks; an indigo telemetry footer; a soft-blue hologram scanner window that retains the orbital anatomy motif.
 
@@ -58,7 +58,7 @@ Three possible directions were considered:
 
 ## Front-end behavior
 
-The default diagnostic grid presents all 18 requested test tiles. Selecting a tile opens a measurement modal with instructions, animated waveform, biomarker result, reference range, and a “Send Results to AI Doctor” action. Left-side views replace the center workspace with profile, health, chronic-condition, or history panels and always expose a back-to-grid control. The right rail stays available so the hologram and chat remain operational while the workspace changes.
+The default diagnostic grid presents all 18 requested test tiles. Selecting a tile opens a measurement modal with instructions, animated waveform, biomarker result, reference range, and a “Send Results to AI Doctor” action. Left-side views replace the center workspace with profile, health, chronic-condition, or history panels and always expose a back-to-grid control. The Flight Surgeon conversation dock remains directly beneath whichever center workspace is active, while the right rail stays dedicated to the interactive hologram and scan controls.
 
 The upload dropzone accepts the requested formats, shows a simulated OCR/vision progress sequence, previews the selected file, and adds a report summary to chat context. The top scan action runs a staged full-system sweep. The settings modal persists API and WebSocket URLs to local storage. Browser speech recognition is used when available and falls back to a visible unsupported-state message.
 

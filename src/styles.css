@@ -340,3 +340,28 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline-color:
   .diagnostic-tile { border-radius: 10px; }
   .telemetry-footer { background: #172d80; }
 }
+
+/* Structural console composition — the board, assistant, and hologram now have distinct zones. */
+.dashboard-layout { grid-template-columns: 190px minmax(0, 1fr) 324px; align-items: start; }
+.workspace { min-width: 0; }
+.workspace > .chat-panel { margin-top: 16px; min-height: 236px; }
+.right-rail { display: block; }
+.right-rail > .hologram-panel { min-height: calc(100vh - 180px); }
+.right-rail .hologram-stage { height: 390px; }
+.grid-banner { margin-top: 2px; }
+@media (max-width: 1240px) {
+  .dashboard-layout { grid-template-columns: 176px minmax(0, 1fr) 292px; }
+  .right-rail > .hologram-panel { min-height: calc(100vh - 180px); }
+  .right-rail .hologram-stage { height: 350px; }
+}
+@media (max-width: 1020px) {
+  .right-rail { grid-column: 1 / -1; display: block; }
+  .right-rail > .hologram-panel { min-height: auto; }
+  .right-rail .hologram-stage { height: 320px; }
+}
+@media (max-width: 720px) {
+  .workspace > .chat-panel { margin-top: 12px; min-height: 276px; }
+  .right-rail { display: flex; }
+  .right-rail > .hologram-panel { min-height: auto; }
+  .right-rail .hologram-stage { height: 300px; }
+}

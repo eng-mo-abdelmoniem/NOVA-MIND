@@ -42,3 +42,11 @@ Validation: exact-source front artwork projected on actual image-derived geometr
 - [ ] Soft even studio lighting: the current display preserves texture-baked shading through an unlit material; it does not implement a physically lit studio setup.
 
 Validation: built successfully; screenshot checks show the full-body front art and an anatomically detailed posterior view on the same model with the white studio field.
+
+## 9. Integrate the supplied AstraMed feature on AI FLIGHT SURGEON: ACTIVE
+- [x] Clicking the existing `AI FLIGHT SURGEON: ACTIVE` header control opens the supplied AstraMed multimodal feature inside the website; preserve the existing dashboard, 3D hologram, and floating chat.
+- [x] Provide all 18 attachment modalities, demo diabetes profile creation, profile refresh, astronaut ID, quality, JSON metrics and optional findings submission, profile overview, latest rule-derived alert with reasons/actions, and session event history.
+- [x] Preserve sequence/quality handling, baseline and cumulative-radiation updates, and recent-results history with visitor-isolated browser memory; packets with a sequence ID that are duplicate/out-of-order must not increase cumulative dose or alter baseline/history. Explicitly disclose that sequence-less packets cannot be reliably identified as duplicates and are treated as new observations.
+- [x] Match the site's clinical design and support mobile/keyboard use, clear input errors, Escape/close and focus restoration; show synthetic-only, illustrative-threshold, not-clinically-validated and no-raw-image/DNA/waveform-interpretation limitations.
+
+Validation: production build and strict TypeScript checks pass; all 17 rule-engine tests pass. Browser smoke test opened the header dialog, created the demo profile, triggered the 55 mg/dL illustrative emergency, confirmed invalid heart-rate input is rejected, confirmed a duplicate sequenced radiation packet leaves cumulative dose at 14.5 mSv and one result, and verified close/focus restoration.

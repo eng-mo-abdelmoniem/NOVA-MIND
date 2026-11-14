@@ -1,0 +1,130 @@
+.surgeon-launch { border: 0; background: none; padding: 0; border-radius: 100px; transition: transform .18s ease; }
+.surgeon-launch:hover { transform: translateY(-1px); }
+.surgeon-launch:hover .status-pill { box-shadow: 0 0 0 3px rgba(72, 155, 134, .1); }
+.astramed-dialog { border: 1px solid #ccdbe5; padding: 0; width: min(1160px, calc(100vw - 40px)); max-width: none; max-height: calc(100dvh - 40px); color: #314b61; background: #f5f9fc; border-radius: 20px; box-shadow: 0 30px 110px rgba(26, 46, 76, .32); overflow-y: auto; }
+.astramed-dialog::backdrop { background: rgba(22, 41, 62, .52); backdrop-filter: blur(5px); }
+.astramed-shell { min-width: 0; }
+.astramed-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 28px; background: #fff; border-bottom: 1px solid #dce6ed; position: sticky; top: 0; z-index: 2; }
+.astramed-brand { display: flex; align-items: center; gap: 14px; }
+.astramed-mark { display: grid; place-items: center; flex-shrink: 0; width: 46px; height: 46px; background: #eef2ff; color: #5268c7; border: 1px solid #d7dff4; border-radius: 14px; }
+.astramed-dialog .eyebrow { color: #73869b; font-size: 10px; letter-spacing: .13em; }
+.astramed-brand h2 { margin: 4px 0 0; font: 700 29px var(--heading); color: #284660; line-height: 1.1; }
+.astramed-brand h2 span { font-size: 18px; font-weight: 500; padding-left: 10px; margin-left: 10px; border-left: 1px solid #d3deea; color: #7b8da1; }
+.astramed-header-actions { display: flex; align-items: center; gap: 17px; }
+.astramed-mode { display: flex; align-items: center; gap: 6px; color: #417e6c; font: 700 10px var(--heading); letter-spacing: .09em; white-space: nowrap; }
+.astramed-mode i { width: 6px; height: 6px; border-radius: 50%; background: #4da587; }
+.astramed-dialog .icon-button { background: #f7f9fc; border-color: #dce6ed; color: #526880; width: 34px; height: 34px; border-radius: 9px; }
+.astramed-content { padding: 24px 28px; }
+.astramed-safety { display: flex; align-items: flex-start; gap: 11px; border: 1px solid #d8deee; background: #eef2fb; color: #5369a4; border-radius: 10px; padding: 13px 16px; margin-bottom: 24px; }
+.astramed-safety svg { flex-shrink: 0; margin-top: 2px; }
+.astramed-safety strong { display: block; font-size: 12px; font-weight: 600; }
+.astramed-safety p { margin: 4px 0 0; font-size: 11px; line-height: 1.55; color: #6c7c99; }
+.astramed-overview-heading, .astramed-history-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.astramed-overview-heading { margin-bottom: 13px; }
+.astramed-dialog h3 { margin: 4px 0 0; font: 600 21px var(--heading); color: #304c67; }
+.astramed-dialog .ghost-button, .astramed-dialog .primary-button { font-size: 11px; text-transform: none; letter-spacing: .03em; padding: 10px 12px; border-radius: 7px; }
+.astramed-dialog .ghost-button { background: #fff; border-color: #d4dfea; color: #667a98; }
+.astramed-dialog .ghost-button:hover { background: #f0f3fb; color: #4b64bf; }
+.astramed-dialog .primary-button { background: #5268c7; color: #fff; border-color: #5268c7; box-shadow: none; }
+.astramed-dialog .primary-button:hover { background: #4259b5; box-shadow: none; }
+.astramed-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 18px; }
+.astramed-stats > div { padding: 17px 19px; border: 1px solid #dce6ed; border-radius: 12px; background: #fff; min-width: 0; }
+.astramed-stats span { display: block; color: #8392a4; font: 700 10px var(--heading); letter-spacing: .1em; }
+.astramed-stats strong { display: block; font: 700 30px var(--heading); color: #3f5c80; margin: 7px 0 3px; overflow-wrap: anywhere; }
+.astramed-stats strong em { font: 500 15px var(--heading); color: #8a9aac; }
+.astramed-stats small { display: block; font-size: 10px; color: #8492a1; line-height: 1.6; }
+.astramed-main-grid { display: grid; grid-template-columns: 1.08fr 1fr; align-items: start; gap: 18px; }
+.astramed-card { border: 1px solid #dce6ed; border-radius: 12px; background: #fff; padding: 20px; min-width: 0; }
+.astramed-card-heading { display: flex; align-items: center; gap: 10px; }
+.astramed-section-icon { display: grid; place-items: center; width: 38px; height: 38px; background: #f1f3fb; border: 1px solid #e0e5f2; color: #687cc3; border-radius: 10px; }
+.astramed-muted { font-size: 11px; line-height: 1.65; color: #8290a1; margin: 12px 0 16px; }
+.astramed-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.astramed-dialog label { display: block; font-size: 11px; font-weight: 500; color: #586d83; }
+.astramed-dialog label > span { color: #97a4b1; font-weight: 400; }
+.astramed-dialog input, .astramed-dialog select, .astramed-dialog textarea { display: block; width: 100%; margin: 6px 0 13px; padding: 10px 11px; border: 1px solid #d9e3ed; color: #405670; background: #f8fafc; font: 12px 'Inter', sans-serif; border-radius: 7px; min-width: 0; }
+.astramed-dialog input::placeholder { color: #9faab8; }
+.astramed-dialog textarea { resize: vertical; font: 12px/1.75 ui-monospace, monospace; min-height: 115px; }
+.astramed-dialog textarea:focus-visible, .astramed-dialog input:focus-visible, .astramed-dialog select:focus-visible { outline: 2px solid #7385ce; outline-offset: 2px; }
+.astramed-field-help { color: #93a0ae; font-size: 10px; line-height: 1.6; margin: -6px 0 13px; }
+.astramed-json-label { margin-top: 1px; }
+.astramed-presets { padding: 10px 0 14px; }
+.astramed-presets > span { color: #98a3b1; font: 700 9px var(--heading); letter-spacing: .1em; }
+.astramed-presets > div { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
+.astramed-presets button { display: flex; gap: 8px; align-items: center; background: #f4f6fb; border: 1px solid #e0e5f0; border-radius: 5px; padding: 6px 8px; font-size: 10px; color: #7482a1; }
+.astramed-presets button:hover { color: #5365bd; border-color: #acb9e5; }
+.astramed-submit-row { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 13px; border-top: 1px solid #eef2f7; }
+.astramed-feedback { display: flex; align-items: flex-start; gap: 7px; background: #f1faf6; color: #4f8b71; border-radius: 6px; font-size: 11px; line-height: 1.6; padding: 10px; margin: 12px 0 0; }
+.astramed-feedback svg { margin-top: 2px; flex-shrink: 0; }
+.astramed-feedback.error { background: #fef2f3; color: #b96671; }
+.astramed-assessment-column { display: grid; gap: 14px; }
+.astramed-assessment { border-top: 3px solid #cdd8e5; }
+.astramed-assessment.warning { border-top-color: #daa44c; }
+.astramed-assessment.emergency { border-top-color: #ca6475; }
+.astramed-assessment.info { border-top-color: #64a991; }
+.astramed-level { display: inline-block; border-radius: 50px; padding: 5px 8px; font: 700 10px var(--heading); letter-spacing: .08em; white-space: nowrap; }
+.astramed-level.info { background: #eaf7f1; color: #548e77; }
+.astramed-level.warning { background: #fff4df; color: #b58a42; }
+.astramed-level.emergency { background: #feedef; color: #be6070; }
+.astramed-risk { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 24px; margin-bottom: 10px; }
+.astramed-risk > strong { font: 600 25px var(--heading); color: #42607e; text-transform: capitalize; }
+.astramed-risk > span { color: #687d98; font: 700 33px var(--heading); }
+.astramed-risk small { font: 500 12px var(--heading); color: #a7b2be; padding-left: 3px; }
+.astramed-reasons { margin: 18px 0; padding-left: 18px; font-size: 11px; line-height: 1.7; color: #7a8c9f; }
+.astramed-reasons li + li { margin-top: 7px; }
+.astramed-assessment h4 { border-top: 1px solid #e9eef4; padding-top: 16px; color: #667d96; font: 700 13px var(--heading); margin: 0 0 11px; }
+.astramed-actions { margin: 0; padding-left: 18px; color: #77899d; font-size: 11px; line-height: 1.65; }
+.astramed-actions li { padding-left: 4px; margin-bottom: 9px; }
+.astramed-review { display: flex; align-items: center; gap: 6px; margin-top: 17px; color: #7288a5; font-size: 10px; background: #f6f8fb; padding: 9px; border-radius: 6px; }
+.astramed-waiting { padding: 28px 10px 30px; text-align: center; color: #bcc7d9; }
+.astramed-waiting strong { display: block; font: 600 20px var(--heading); color: #7c8ca6; margin-top: 14px; }
+.astramed-waiting p { font-size: 11px; line-height: 1.7; color: #92a0b2; max-width: 260px; margin: 8px auto 0; }
+.astramed-profile-context { background: #fafdff; }
+.astramed-profile-context dl { margin: 14px 0; }
+.astramed-profile-context dl > div { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 7px 0; border-bottom: 1px solid #e5edf4; }
+.astramed-profile-context dt { font-size: 11px; color: #8190a2; }
+.astramed-profile-context dd { font: 600 17px var(--heading); color: #6a81a5; margin: 0; }
+.astramed-profile-context .astramed-muted { margin-bottom: 0; }
+.astramed-modalities { margin: 18px 0; }
+.astramed-modality-chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 15px 0; }
+.astramed-modality-chips button { background: #f6f9fc; border: 1px solid #e0e8f0; color: #7d8ea2; font-size: 10px; padding: 6px 9px; border-radius: 6px; }
+.astramed-modality-chips button:hover, .astramed-modality-chips button.selected { background: #eef1fd; border-color: #c2cdee; color: #5b6ec0; }
+.astramed-modalities .astramed-muted { margin-bottom: 0; }
+.astramed-history-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.astramed-history-heading > span { font: 600 11px var(--heading); color: #98a8ba; }
+.astramed-event-list { margin-top: 15px; max-height: 240px; overflow-y: auto; scrollbar-width: thin; }
+.astramed-event, .astramed-result { display: flex; align-items: flex-start; gap: 10px; padding: 12px 0; border-bottom: 1px solid #e9eef4; }
+.astramed-event > div, .astramed-result > div { flex: 1; min-width: 0; }
+.astramed-event strong, .astramed-result strong { display: block; color: #6f829b; font-size: 11px; font-weight: 500; text-transform: capitalize; }
+.astramed-event small, .astramed-result small { display: block; margin-top: 4px; color: #9aa7b6; font-size: 10px; }
+.astramed-event time, .astramed-result time { white-space: nowrap; color: #a1afbe; font: 10px var(--heading); }
+.astramed-result code { display: block; overflow-wrap: anywhere; color: #8b9bb0; font: 9px/1.65 ui-monospace, monospace; margin-top: 7px; }
+.astramed-empty { padding: 12px 0; font-size: 11px; line-height: 1.7; color: #a1aebd; }
+.astramed-footer { display: flex; align-items: flex-start; gap: 8px; padding: 18px 2px 0; color: #9aaabc; }
+.astramed-footer svg { flex-shrink: 0; margin-top: 2px; }
+.astramed-footer p { margin: 0; font-size: 10px; line-height: 1.7; }
+@media (max-width: 760px) {
+  .astramed-dialog { width: calc(100vw - 20px); max-height: calc(100dvh - 20px); border-radius: 14px; }
+  .astramed-header { padding: 17px; gap: 10px; }
+  .astramed-brand { gap: 9px; }
+  .astramed-brand .eyebrow { max-width: 200px; font-size: 8px; }
+  .astramed-brand h2 { font-size: 24px; }
+  .astramed-brand h2 span { display: block; font-size: 13px; padding: 0; margin: 4px 0 0; border: 0; }
+  .astramed-mark { width: 36px; height: 36px; border-radius: 10px; }
+  .astramed-mode { display: none; }
+  .astramed-content { padding: 17px; }
+  .astramed-stats { grid-template-columns: 1fr; gap: 8px; }
+  .astramed-stats > div { padding: 13px 15px; }
+  .astramed-stats strong { font-size: 24px; }
+  .astramed-main-grid, .astramed-history-grid { grid-template-columns: 1fr; gap: 14px; }
+  .astramed-card { padding: 16px; }
+  .astramed-overview-heading h3 { font-size: 18px; }
+  .astramed-overview-heading .ghost-button { padding: 8px; font-size: 10px; }
+  .astramed-submit-row > button { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) { .surgeon-launch { transition: none; } }
+
+/* The legacy mobile header hides status pills; this one is now a feature button. */
+@media (max-width: 720px) {
+  .top-actions .surgeon-launch .status-pill { display: flex; }
+  .top-actions { width: 100%; margin-left: 0; justify-content: flex-end; }
+}

@@ -5,6 +5,7 @@ import { analyzeHologramRegion, connectTelemetryWebSocket, getBackendConfig, sav
 import { bodyParts, chronicSeries, diagnosticTests, healthSeries, medicalLog, profile, telemetrySeed, alerts, type DiagnosticTest, type TabId } from './data'
 import { useHudCommand } from './context/HudCommandContext'
 import HumanHologram3D from './components/HumanHologram3D'
+import AstraMedPanel from './components/AstraMedPanel'
 
 type ChatMessage = { id: number; role: 'user' | 'assistant'; text: string; time: string; tone?: 'system' | 'alert' }
 type Modal = { type: 'test'; testId: string } | { type: 'vital'; vital: string } | { type: 'scan' } | { type: 'settings' } | null
@@ -50,6 +51,7 @@ function App() {
   const [scanProgress, setScanProgress] = useState<number | null>(null)
   const [notificationsOpen, setNotificationsOpen] = useState(false)
   const [chatOpen, setChatOpen] = useState(false)
+  const [astraMedOpen, setAstraMedOpen] = useState(false)
   const [chatInput, setChatInput] = useState('')
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
     { id: 1, role: 'assistant', text: 'Nova Mind Flight Surgeon online. Primary life-support biometrics are stable. What should I inspect?', time: '14:24:10' },
@@ -239,7 +241,7 @@ function App() {
       <button className="exam-button" onClick={runFullScan}><ScanLine size={18} /><span>REQUEST MEDICAL EXAM</span><ArrowUpRight size={15} /></button>
       <div className="top-actions">
         <div className="met-block"><span className="eyebrow">MISSION ELAPSED TIME</span><strong>DAY 142 <span>|</span> {clock}</strong></div>
-        <StatusPill tone="green">AI FLIGHT SURGEON: ACTIVE</StatusPill>
+        <button className="surgeon-launch" type="button" aria-haspopup="dialog" aria-expanded={astraMedOpen} aria-controls="astramed-flight-surgeon" onClick={() => setAstraMedOpen(true)}><StatusPill tone="green">AI FLIGHT SURGEON: ACTIVE <ArrowUpRight size={11} /></StatusPill></button>
         <div className="header-icon-wrap"><button className="header-icon" aria-label="Open alerts" onClick={() => setNotificationsOpen((value) => !value)}><Bell size={17} /><span className="notification-dot">3</span></button>{notificationsOpen && <NotificationTray />}</div>
         <button className="header-icon" aria-label="Open settings" onClick={() => setModal({ type: 'settings' })}><Settings size={17} /></button>
       </div>
@@ -279,6 +281,7 @@ function App() {
     <button className={`chat-fab ${chatOpen ? 'active' : ''}`} aria-label={chatOpen ? 'Close Flight Surgeon' : 'Open Flight Surgeon'} aria-expanded={chatOpen} onClick={() => setChatOpen((value) => !value)}><Sparkles size={20} /><span className="chat-fab-pulse" /><strong>AI</strong></button>
     <TelemetryFooter telemetry={telemetry} onOpen={openVital} online={bridgeOnline} />
 
+    <AstraMedPanel open={astraMedOpen} onClose={() => setAstraMedOpen(false)} />
     {modal?.type === 'test' && currentTest && <MeasurementModal test={currentTest} onClose={() => setModal(null)} onSend={async (text) => { addMessage('user', text); const response = await sendChatToCustomAI(text, { telemetry, selectedBodyPart: selectedPart }); addMessage('assistant', response.reply, 'system'); executeAIResponse(response); setModal(null) }} />}
     {modal?.type === 'scan' && <ScanModal progress={scanProgress ?? 0} onClose={() => setModal(null)} onSummary={() => { addMessage('assistant', 'Full-system sweep complete: 18 channels nominal; one radiation watch remains on the mission record.', 'system'); setModal(null); setScanProgress(null) }} />}
     {modal?.type === 'vital' && <VitalModal vital={modal.vital} telemetry={telemetry} onClose={() => setModal(null)} onOpenFullTrend={openFullTrend} />}

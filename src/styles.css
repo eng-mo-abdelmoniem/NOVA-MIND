@@ -397,3 +397,8 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline-color:
   .chat-fab { right: 14px; bottom: 88px; width: 56px; height: 56px; }
   .chat-popover .chat-panel { min-height: 330px; }
 }
+
+/* Clean alpha asset: render the anatomy directly over the scanner field. */
+.human-scan-figure img { mix-blend-mode: normal; filter: saturate(.82) hue-rotate(150deg) brightness(1.04); }
+.human-scan-figure.skeletal img { filter: saturate(.35) hue-rotate(150deg) brightness(1.1) contrast(1.08); }
+.human-scan-figure.surface-wounds img { filter: saturate(.9) hue-rotate(150deg) brightness(1.04); }

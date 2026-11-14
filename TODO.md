@@ -1,4 +1,4 @@
-# ARES-IV Orbital Med-Bay — TODO
+# Nova Mind Orbital Med-Bay — TODO
 
 ## 1. Build the single-view clinical aerospace shell
 - Deliver a bright pale-blue clinical console inspired by the supplied reference, with rounded white diagnostic cards, restrained indigo navigation accents, amber watch states, crimson critical states, a subtle orbital background, Rajdhani/Inter typography, mission badge, live MET clock, AI Flight Surgeon status, notifications, and settings controls.

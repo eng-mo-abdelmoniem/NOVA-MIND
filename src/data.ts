@@ -45,7 +45,7 @@ export const telemetrySeed = {
 
 export const profile = {
   name: 'Cmdr. Alex Vance',
-  callsign: 'ARES-04 / VANCE',
+  callsign: 'NOVA-04 / VANCE',
   rank: 'Mission Commander · Flight Surgeon Liaison',
   age: '38 years',
   blood: 'O−',

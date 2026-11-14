@@ -1,8 +1,8 @@
-# ARES-IV Orbital Med-Bay — Implementation Plan
+# Nova Mind Orbital Med-Bay — Implementation Plan
 
 ## Product scope
 
-A single-screen astronaut medical command center that runs convincingly in simulation mode without a backend, while exposing clean integration points for the requested FastAPI/WebSocket bridge. The experience prioritizes the diagnostic grid, live telemetry, anatomical hologram, and Flight Surgeon chat as a cohesive operational surface rather than a generic dashboard.
+A single-screen Nova Mind astronaut medical command center that runs convincingly in simulation mode without a backend, while exposing clean integration points for the requested FastAPI/WebSocket bridge. The experience prioritizes the diagnostic grid, live telemetry, anatomical hologram, and Flight Surgeon chat as a cohesive operational surface rather than a generic dashboard.
 
 ## Implementation approach
 
@@ -52,9 +52,9 @@ Three possible directions were considered:
 
 **Brand voice:** direct, calm, and operational. Example lines: “Primary systems nominal. I’m watching the trend, not just the number.” “Place the thoracic leads inside the cyan guide ring; I’ll verify signal quality before interpretation.”
 
-**Wordmark & logo:** a compact `ARES-IV` wordmark paired with a split-orbit chevron mark: two cyan arcs around a small amber star, echoed in the mission badge and favicon treatment.
+**Wordmark & logo:** a compact `NOVA MIND` wordmark paired with a split-orbit chevron mark: two indigo arcs around a small amber star, echoed in the mission badge and favicon treatment.
 
-**Signature brand color:** `#3D5FC8` — a clinical indigo reserved for active states, navigation, and the ARES orbital trace.
+**Signature brand color:** `#3D5FC8` — a clinical indigo reserved for active states, navigation, and the Nova Mind orbital trace.
 
 ## Front-end behavior
 

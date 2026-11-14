@@ -27,3 +27,10 @@
 
 ## 6. Complete the managed build handoff
 - Serve `public/manus-routes.json` for the `/` route, set project logo metadata, run diagnostics and production build, verify preview readiness, and push the completed work to the managed `origin/main` checkpoint.
+
+## 7. Convert the supplied anatomical reference into the site’s 3D hologram
+- [x] Use the user-supplied `ares-human-hologram-clean.webp` as the image-to-3D reference; maintain the same icy-blue color, full-body pose, human silhouette, and X-ray/anatomical design as closely as a single-view reconstruction permits.
+- [x] Display the generated textured GLB in the existing anatomical-guide panel rather than stripping its texture or substituting a generic human figure. Keep the existing dashboard, front/back views, scanning, and region/protocol interactions.
+- [x] Ship the generated model at a same-origin static website path so the browser’s GLTF loader can fetch it reliably; show explicit loading/error states, dispose rendering resources safely, and checkpoint the delivered change. Preserve existing Auto Publish authorization.
+
+Validation: exact-source front artwork projected on actual image-derived geometry; successful full-body scanner rendering; `pnpm build` and `git diff --check` pass; focused read-only review passes. Side/back anatomy is inferred and layers remain display presets.

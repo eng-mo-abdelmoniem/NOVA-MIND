@@ -72,3 +72,7 @@ The upload dropzone accepts the requested formats, shows a simulated OCR/vision 
 6. Run the production build and resolve actionable diagnostics.
 7. Capture a desktop and mobile preview for visual inspection if needed.
 8. Commit the delivered work and push to `origin/main` so the managed checkpoint is recorded.
+
+## Reference-preserving 3D hologram update
+
+The supplied `ares-human-hologram-clean.webp` is the authoritative anatomical and icy-blue visual reference. One detailed textured GLB was generated from that exact image, with original-image texture alignment and the original static pose. The reference-preserving Three.js viewer in `src/components/HumanHologram3D.tsx` retains generated color maps for sides/back and projects the user's exact source artwork onto the front-facing 3D mesh, because generation washed out the source's X-ray detail. This is textured 3D geometry, not a 2D billboard. Keep existing front/back, scan, and region/protocol behavior. `public/ares-human-hologram.glb` serves the model same-origin, `public/ares-human-hologram-reference.webp` supplies the authoritative front color artwork, and `src/hologramAsset.ts` points to the GLB. Use static delivery because the managed `/manus-storage/` redirect fails browser-side GLTFLoader CORS despite succeeding in command-line fetches. Loading errors are explicit; a single photo cannot establish exact unseen anatomy, and existing layer controls are display treatments rather than separate medical meshes. The rest of the clinical console remains unchanged.

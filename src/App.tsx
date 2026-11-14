@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Activity, AlertTriangle, ArrowLeft, ArrowUpRight, Bell, Brain, Check, ChevronDown, CircleHelp, Download, FileScan, Gauge, HeartPulse, Info, Layers3, Mic, PanelRight, Play, Plus, Radio, RefreshCw, ScanLine, Search, Send, Settings, ShieldCheck, Sparkles, Stethoscope, Upload, UserRound, Waves, X, Zap } from 'lucide-react'
-import * as THREE from 'three'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { analyzeHologramRegion, connectTelemetryWebSocket, getBackendConfig, saveBackendConfig, sendChatToCustomAI, testBackendConnection, triggerDiagnosticTest, uploadMedicalReport, type AICommand } from './services/aiBridge'
 import { bodyParts, chronicSeries, diagnosticTests, healthSeries, medicalLog, profile, telemetrySeed, alerts, type DiagnosticTest, type TabId } from './data'
 import { useHudCommand } from './context/HudCommandContext'
+import HumanHologram3D from './components/HumanHologram3D'
 
 type ChatMessage = { id: number; role: 'user' | 'assistant'; text: string; time: string; tone?: 'system' | 'alert' }
 type Modal = { type: 'test'; testId: string } | { type: 'vital'; vital: string } | { type: 'scan' } | { type: 'settings' } | null
@@ -349,75 +348,10 @@ function HistoryWorkspace({ query, onQuery, range, onRange, rows, onExport }: { 
   return <><SectionLabel eyebrow="CLINICAL ARCHIVE / VERIFIED LOG" title="Medical history" detail="Searchable mission telemetry with export-ready records." action={<div className="export-actions"><button className="ghost-button" onClick={() => onExport('json')}><Download size={13} /> JSON</button><button className="ghost-button" onClick={() => onExport('csv')}><Download size={13} /> CSV</button></div>} /><div className="history-toolbar"><div className="search-box"><Search size={15} /><input placeholder="Search test type or vital sign" value={query} onChange={(event) => onQuery(event.target.value)} /></div><div className="range-switcher"><button className={range === '24h' ? 'active' : ''} onClick={() => onRange('24h')}>LAST 24 HOURS</button><button className={range === '7d' ? 'active' : ''} onClick={() => onRange('7d')}>LAST 7 DAYS</button></div></div><div className="history-table"><div className="table-heading"><span>UTC TIME</span><span>TEST / CHANNEL</span><span>MEASUREMENT</span><span>RESULT</span><span>STATUS</span></div>{visibleRows.map((row, index) => <div className="table-row" key={`${row.time}-${row.type}-${index}`}><span className="mono-text">{row.time}</span><strong>{row.type}</strong><span>{row.metric}</span><span>{row.result}</span><StatusPill tone={row.status === 'Nominal' || row.status === 'Cleared' ? 'green' : 'amber'}>{row.status}</StatusPill></div>)}{visibleRows.length === 0 && <div className="empty-state"><Search size={20} /> No medical records match this query.</div>}</div><div className="history-foot"><span><Radio size={14} /> Showing {visibleRows.length} records · {range === '7d' ? '7-day archive' : 'last 24 hours'} · source: onboard event store</span><span>EXPORTS ARE SIMULATION-SAFE</span></div></>
 }
 
-function HumanHologram3D({ view, layer, scanning }: { view: 'front' | 'back'; layer: string; scanning: boolean }) {
-  const mountRef = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    const mount = mountRef.current
-    if (!mount) return
-    const scene = new THREE.Scene()
-    const camera = new THREE.PerspectiveCamera(28, 1, .1, 100)
-    camera.position.set(0, .15, 5.4)
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true })
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    renderer.setClearColor(0x000000, 0)
-    mount.appendChild(renderer.domElement)
-    const group = new THREE.Group()
-    group.rotation.y = view === 'back' ? Math.PI : 0
-    scene.add(group)
-    scene.add(new THREE.HemisphereLight(0x9bbcff, 0x071432, 2.2))
-    const key = new THREE.DirectionalLight(0x6fb7ff, 3.5)
-    key.position.set(2, 3, 4)
-    scene.add(key)
-    const rim = new THREE.PointLight(0x365fff, 4, 8)
-    rim.position.set(-2, 1, -2)
-    scene.add(rim)
-    let frame = 0
-    const resize = () => {
-      const width = Math.max(1, mount.clientWidth)
-      const height = Math.max(1, mount.clientHeight)
-      renderer.setSize(width, height, false)
-      camera.aspect = width / height
-      camera.updateProjectionMatrix()
-    }
-    resize()
-    const observer = new ResizeObserver(resize)
-    observer.observe(mount)
-    const color = layer === 'Surface / Wounds' ? 0x8a9dff : layer === 'Organs' ? 0x79a9ff : 0x8fcaff
-    const material = new THREE.MeshStandardMaterial({ color, emissive: layer === 'Skeletal' ? 0x3c7cff : 0x1556d8, emissiveIntensity: scanning ? 3.2 : 2.35, metalness: .12, roughness: .2, transparent: true, opacity: layer === 'Skeletal' ? .86 : .94, wireframe: layer === 'Skeletal' })
-    const loader = new GLTFLoader()
-    loader.load('/nova-human-hologram-reference-3d.glb', (gltf) => {
-      const model = gltf.scene
-      model.traverse((node) => {
-        if (node instanceof THREE.Mesh) {
-          node.material = material.clone()
-          node.castShadow = false
-          node.receiveShadow = false
-        }
-      })
-      const box = new THREE.Box3().setFromObject(model)
-      const size = box.getSize(new THREE.Vector3())
-      const center = box.getCenter(new THREE.Vector3())
-      model.position.sub(center)
-      const scale = 3.8 / Math.max(size.y, .001)
-      model.scale.setScalar(scale)
-      model.position.y = -.15
-      group.add(model)
-    })
-    const animate = () => {
-      frame = requestAnimationFrame(animate)
-      group.position.y = Math.sin(Date.now() * .0012) * .025
-      renderer.render(scene, camera)
-    }
-    animate()
-    return () => { cancelAnimationFrame(frame); observer.disconnect(); renderer.dispose(); mount.removeChild(renderer.domElement) }
-  }, [view, layer, scanning])
-  return <div ref={mountRef} className="hologram-3d-canvas" aria-label="Interactive blue 3D human hologram" />
-}
 function HologramPanel({ view, layer, selectedPart, scanning, onView, onLayer, onPart, onScan }: { view: 'front' | 'back'; layer: string; selectedPart: string; scanning: boolean; onView: (view: 'front' | 'back') => void; onLayer: (layer: string) => void; onPart: (part: string) => void; onScan: () => void }) {
   const selected = bodyParts.find((part) => part.id === selectedPart) ?? bodyParts[5]
-  return <section className="hologram-panel"><div className="panel-heading"><div><span className="eyebrow">AI MEDICAL HOLOGRAM</span><h2>ANATOMICAL GUIDE</h2></div><span className="panel-live"><span className="status-dot" /> LIVE</span></div><div className="holo-controls"><div className="segmented"><button className={view === 'front' ? 'active' : ''} onClick={() => onView('front')}>FRONT</button><button className={view === 'back' ? 'active' : ''} onClick={() => onView('back')}>BACK</button></div><div className="layer-select"><Layers3 size={13} /><select value={layer} onChange={(event) => onLayer(event.target.value)}><option>Full Body</option><option>Skeletal</option><option>Organs</option><option>Surface / Wounds</option></select><ChevronDown size={12} /></div></div><div className={`hologram-stage ${scanning ? 'scanning' : ''}`}><div className="holo-grid" /><div className="scan-line" /><div className={`human-scan-figure ${view} ${layer === 'Skeletal' ? 'skeletal' : ''} ${layer === 'Organs' ? 'organs' : ''} ${layer === 'Surface / Wounds' ? 'surface-wounds' : ''}`}>
+  return <section className="hologram-panel"><div className="panel-heading"><div><span className="eyebrow">AI MEDICAL HOLOGRAM</span><h2>ANATOMICAL GUIDE</h2></div><span className="panel-live"><span className="status-dot" /> LIVE</span></div><div className="holo-controls"><div className="segmented"><button className={view === 'front' ? 'active' : ''} onClick={() => onView('front')}>FRONT</button><button className={view === 'back' ? 'active' : ''} onClick={() => onView('back')}>BACK</button></div><div className="layer-select"><Layers3 size={13} /><select value={layer} onChange={(event) => onLayer(event.target.value)}><option>Full Body</option><option>Skeletal</option><option>Organs</option><option>Surface / Wounds</option></select><ChevronDown size={12} /></div></div><div className={`hologram-stage ${scanning ? 'scanning' : ''}`}><div className="holo-grid" /><div className="scan-line" /><div className={`human-scan-figure ${view}`}>
   <HumanHologram3D view={view} layer={layer} scanning={scanning} />
-  <div className="anatomy-scan-overlay" aria-hidden="true" />
   <svg className="body-hit-map" viewBox="0 0 100 126" role="img" aria-label="Interactive human body regions">
     {bodyParts.map((part) => <rect key={part.id} className={`body-hit ${part.id === selectedPart ? 'selected' : ''}`} x={part.x - part.width / 2} y={part.y - part.height / 2} width={part.width} height={part.height} rx="2" onClick={() => onPart(part.id)} />)}
   </svg>

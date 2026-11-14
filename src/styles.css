@@ -368,11 +368,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline-color:
 
 /* Real-human hologram layer: the SVG remains only as an invisible interaction map. */
 .human-scan-figure { position: absolute; inset: 5px 12%; display: grid; place-items: center; pointer-events: none; }
-.human-scan-figure img { width: 100%; height: 100%; object-fit: contain; opacity: .9; filter: saturate(.7) hue-rotate(150deg) brightness(1.08) drop-shadow(0 0 10px rgba(61,95,200,.42)); mix-blend-mode: multiply; }
-.human-scan-figure.back img, .human-scan-figure.back .body-hit-map { transform: scaleX(-1); }
-.human-scan-figure.skeletal img { filter: saturate(.2) hue-rotate(145deg) brightness(1.2) contrast(1.15) drop-shadow(0 0 12px rgba(61,95,200,.5)); }
-.human-scan-figure.organs::after { content: ''; position: absolute; inset: 24% 26% 34%; border-radius: 45%; background: radial-gradient(ellipse at 48% 40%, rgba(210,138,38,.28), transparent 18%), radial-gradient(ellipse at 37% 52%, rgba(109,97,177,.24), transparent 21%), radial-gradient(ellipse at 63% 52%, rgba(109,97,177,.24), transparent 21%); mix-blend-mode: screen; }
-.human-scan-figure.surface-wounds img { filter: saturate(.9) hue-rotate(145deg) brightness(1.08) drop-shadow(0 0 11px rgba(214,93,109,.35)); }
+.human-scan-figure.back .body-hit-map { transform: scaleX(-1); }
 .body-hit-map { position: absolute; inset: 4% 17%; width: 66%; height: 92%; overflow: visible; pointer-events: auto; }
 .body-hit { fill: rgba(61,95,200,.005); stroke: transparent; cursor: pointer; transition: .18s; }
 .body-hit:hover { fill: rgba(61,95,200,.2); stroke: rgba(61,95,200,.7); }
@@ -398,11 +394,6 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline-color:
   .chat-popover .chat-panel { min-height: 330px; }
 }
 
-/* Clean alpha asset: render the anatomy directly over the scanner field. */
-.human-scan-figure img { mix-blend-mode: normal; filter: saturate(.82) hue-rotate(150deg) brightness(1.04); }
-.human-scan-figure.skeletal img { filter: saturate(.35) hue-rotate(150deg) brightness(1.1) contrast(1.08); }
-.human-scan-figure.surface-wounds img { filter: saturate(.9) hue-rotate(150deg) brightness(1.04); }
-
 /* Interactive 3D hologram surface. */
 .hologram-3d-canvas { position: absolute; inset: 0; pointer-events: none; }
 .hologram-3d-canvas canvas { display: block; width: 100%; height: 100%; }
@@ -426,3 +417,15 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline-color:
 .body-hit:hover { fill: rgba(83,164,255,.2); stroke: rgba(119,194,255,.9); }
 .body-hit.selected { fill: rgba(61,143,255,.22); stroke: #7dccff; }
 @media (max-width: 720px) { .human-scan-figure { inset: 4px 13%; } }
+
+/* Model loading and failure affordances stay inside the existing scanner frame. */
+.hologram-viewer { position: absolute; inset: 0; }
+.hologram-model-status { position: absolute; inset: 12px; z-index: 3; display: grid; align-content: center; justify-items: center; gap: 7px; padding: 12px; border: 1px solid rgba(105,169,255,.2); background: rgba(2,8,19,.78); color: #a9ceff; text-align: center; font: 700 9px var(--heading); letter-spacing: .13em; pointer-events: auto; }
+.hologram-model-status small { max-width: 100%; color: #8299b8; font: 9px Inter, sans-serif; letter-spacing: .02em; line-height: 1.4; overflow-wrap: anywhere; }
+.hologram-load-track { width: min(150px, 80%); height: 3px; overflow: hidden; background: rgba(130,166,216,.2); }
+.hologram-load-track i { display: block; height: 100%; background: #73b5ff; box-shadow: 0 0 8px rgba(92,160,255,.65); transition: width .2s ease; }
+.hologram-load-track i.indeterminate { width: 35%; animation: hologramLoad 1.1s ease-in-out infinite alternate; }
+.hologram-model-status.error { align-content: center; color: #d7e7ff; }
+.hologram-model-status.error button { margin-top: 4px; border: 1px solid rgba(105,169,255,.45); padding: 7px 10px; background: rgba(48,94,163,.18); color: #a9ceff; font: 700 9px var(--heading); letter-spacing: .1em; }
+.hologram-model-status.error button:hover { border-color: #83bbff; background: rgba(48,94,163,.32); }
+@keyframes hologramLoad { from { transform: translateX(-35%); } to { transform: translateX(220%); } }

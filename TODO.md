@@ -50,3 +50,9 @@ Validation: built successfully; screenshot checks show the full-body front art a
 - [x] Match the site's clinical design and support mobile/keyboard use, clear input errors, Escape/close and focus restoration; show synthetic-only, illustrative-threshold, not-clinically-validated and no-raw-image/DNA/waveform-interpretation limitations.
 
 Validation: production build and strict TypeScript checks pass; all 17 rule-engine tests pass. Browser smoke test opened the header dialog, created the demo profile, triggered the 55 mg/dL illustrative emergency, confirmed invalid heart-rate input is rejected, confirmed a duplicate sequenced radiation packet leaves cumulative dose at 14.5 mSv and one result, and verified close/focus restoration.
+
+## 10. Replace NASA branding with the user's supplied Nova Mind logo
+- [x] Replace the NASA project logo with the attached blue-orbit and gold-star image; preserve its original colors, design, and complete uncropped image.
+- [x] Use the same supplied image for the website's header logo and browser favicon without changing the rest of the dashboard or existing integrations.
+
+Validation: `pnpm build` and `git diff --check` pass; the header uses the original uploaded image with `object-fit: contain`, and project metadata references a durable public HTTPS copy.

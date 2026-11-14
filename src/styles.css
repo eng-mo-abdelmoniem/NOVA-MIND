@@ -406,3 +406,12 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline-color:
 /* Interactive 3D hologram surface. */
 .hologram-3d-canvas { position: absolute; inset: 0; pointer-events: none; }
 .hologram-3d-canvas canvas { display: block; width: 100%; height: 100%; }
+
+/* Reference-aligned white medical scan field for the 3D hologram. */
+.hologram-stage { background: #fff; border-color: #c5d7ec; }
+.hologram-stage::before { border-color: rgba(82,111,209,.16); }
+.holo-grid { opacity: .12; background-image: linear-gradient(rgba(82,111,209,.14) 1px, transparent 1px), linear-gradient(90deg, rgba(82,111,209,.14) 1px, transparent 1px); }
+.human-scan-figure { inset: 4px 23%; }
+.holo-scan-label { color: #4665c4; }
+.scan-line { background: #526fd1; box-shadow: 0 0 15px 4px rgba(82,111,209,.4); }
+@media (max-width: 720px) { .human-scan-figure { inset: 4px 20%; } }

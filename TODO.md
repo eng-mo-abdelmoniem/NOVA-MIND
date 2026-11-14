@@ -1,8 +1,8 @@
 # ARES-IV Orbital Med-Bay — TODO
 
-## 1. Build the single-view orbital HUD shell
-- Deliver a deep-space obsidian interface with translucent glass panels, cyan telemetry borders, amber watch states, crimson critical states, subtle animated starfield, Rajdhani/Inter typography, mission badge, live MET clock, AI Flight Surgeon status, notifications, and settings controls.
-- Keep the layout responsive across desktop and mobile while preserving the left command rail, center workspace, right hologram/chat rail, and fixed telemetry footer hierarchy.
+## 1. Build the single-view clinical aerospace shell
+- Deliver a bright pale-blue clinical console inspired by the supplied reference, with rounded white diagnostic cards, restrained indigo navigation accents, amber watch states, crimson critical states, a subtle orbital background, Rajdhani/Inter typography, mission badge, live MET clock, AI Flight Surgeon status, notifications, and settings controls.
+- Keep the layout responsive across desktop and mobile while preserving the left command rail, center six-column diagnostic workspace, right hologram/chat rail, and fixed indigo telemetry footer hierarchy.
 
 ## 2. Deliver the diagnostic measurement grid and full-system scan
 - Show the exact 18 unique tiles: Blood Test, Urine Test, Saliva Test, Sweat Test, Immune Panel, DNA / Microbe Test, Ultrasound, X-Ray, Eye & Vision (SANS), Bone Density, Blood Pressure, ECG, Oxygen Saturation, Temp & Breathing, Muscle Mass, Radiation Bio-Scan, Skin / Wound Scan, and IV Fluid & Hydration.

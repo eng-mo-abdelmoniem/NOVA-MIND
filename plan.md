@@ -32,19 +32,19 @@ Three possible directions were considered:
 2. **Clinical Glass Lab** — brighter sterile glass panels with restrained telemetry accents. (0.04)
 3. **Retro-Futurist Flight Deck** — amber-forward CRT styling with medical overlays. (0.02)
 
-### Chosen movement: Orbital Mission Control
+### Chosen movement: Clinical Aerospace Console
 
-**Core principles:** instrument-first hierarchy; calm clarity under pressure; layered glass over a starfield; every control produces visible system feedback.
+**Core principles:** instrument-first hierarchy; calm clarity under pressure; soft clinical surfaces with precise aerospace accents; every control produces visible system feedback.
 
-**Color philosophy:** obsidian gives the UI the depth of a spacecraft viewport. Cyan is the signature signal color for trusted telemetry and navigation. Amber marks watch conditions without competing with primary actions. Crimson is reserved for critical health states. Pale blue-gray text keeps long medical labels legible without flattening the atmosphere.
+**Color philosophy:** pale blue-white surfaces create the trust and cleanliness of a clinical console while indigo telemetry bands anchor the spacecraft context. Blue is the signature navigation and data color, amber marks watch conditions, green confirms safe readings, and crimson is reserved for critical states.
 
-**Layout paradigm:** a three-zone flight deck with a narrow command rail on the left, a broad diagnostic work surface in the center, and a vertical hologram/chat stack on the right. The footer telemetry strip acts as a persistent instrument bus rather than a conventional dashboard row.
+**Layout paradigm:** a three-zone medical workstation with a narrow rounded command rail on the left, a bright six-column diagnostic work surface in the center, and a vertical hologram/chat stack on the right. The indigo footer telemetry strip acts as a persistent instrument bus.
 
-**Signature elements:** thin cyan corner brackets and measurement ticks; a segmented mission-status header; a luminous anatomical wireframe framed like a scanner window.
+**Signature elements:** rounded white diagnostic cards with restrained colored signal marks; an indigo telemetry footer; a soft-blue hologram scanner window that retains the orbital anatomy motif.
 
 **Interaction philosophy:** actions feel like commands sent to a spacecraft. Selection adds a cyan trace, scanning reveals a progress state, and every system response is echoed in the chat log or status rail. No dead ends or empty states.
 
-**Animation:** slow starfield drift and scanline shimmer in the background; 150–220ms panel transitions; waveform and telemetry pulses use subtle eased loops; diagnostic scanning has a clear 3-second progression and a terminal summary state. Respect reduced-motion preferences.
+**Animation:** keep the starfield extremely subtle; use 150–220ms card elevation and color transitions; waveform and telemetry pulses remain restrained; diagnostic scanning has a clear 3-second progression and terminal summary state. Respect reduced-motion preferences.
 
 **Typography system:** `Rajdhani` for navigation, labels, timestamps, and vital values; `Inter` for clinical descriptions and chat. Uppercase is reserved for mission labels and compact controls. Use tabular numerals for telemetry.
 
@@ -54,7 +54,7 @@ Three possible directions were considered:
 
 **Wordmark & logo:** a compact `ARES-IV` wordmark paired with a split-orbit chevron mark: two cyan arcs around a small amber star, echoed in the mission badge and favicon treatment.
 
-**Signature brand color:** `#60E8FF` — a cool, luminous cyan reserved for telemetry, active states, and the ARES orbital trace.
+**Signature brand color:** `#3D5FC8` — a clinical indigo reserved for active states, navigation, and the ARES orbital trace.
 
 ## Front-end behavior
 

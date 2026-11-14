@@ -112,3 +112,231 @@ button { cursor: pointer; }
 .streaming.offline { color: var(--amber); }
 .streaming.offline i { background: var(--amber); }
 .surface-layer { transition: opacity .25s ease; }
+
+/* Clinical aerospace console refresh — visual layer only; interaction states remain unchanged. */
+:root {
+  --bg: #eaf4f8;
+  --panel: rgba(255, 255, 255, .94);
+  --panel-soft: rgba(255, 255, 255, .82);
+  --line: #c9dce7;
+  --line-bright: #6a83d9;
+  --cyan: #3d5fc8;
+  --amber: #d28a26;
+  --green: #2c9879;
+  --violet: #6d61b1;
+  --red: #d65d6d;
+  --muted: #5f7381;
+  --dim: #8ba0ac;
+  --heading: 'Rajdhani', sans-serif;
+  color: #182c45;
+}
+body { background: #eaf4f8; color: #182c45; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline-color: #526bd0; }
+.app-shell { padding: 0 24px 106px; background: radial-gradient(circle at 52% -18%, rgba(255,255,255,.98), transparent 46%), linear-gradient(180deg, #f4f9fb 0%, #e4f0f5 100%); }
+.starfield { opacity: .24; }
+.starfield::before { background-image: linear-gradient(rgba(61,95,200,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(61,95,200,.045) 1px, transparent 1px); }
+.starfield i { background: #6e8fd6; box-shadow: 0 0 7px 1px rgba(61,95,200,.22); }
+.constellation { border-color: rgba(61,95,200,.06); }
+.constellation::before, .constellation::after { border-color: rgba(61,95,200,.08); }
+.topbar { min-height: 76px; border-bottom-color: #c8dce7; }
+.orbit-mark { border-color: #4968cc; color: #d28a26; box-shadow: 0 4px 14px rgba(61,95,200,.12); }
+.orbit-mark::before, .orbit-mark::after { border-color: rgba(73,104,204,.38); }
+.orbit-mark i { background: #4968cc; box-shadow: 0 0 6px #4968cc; }
+.mission-name { color: #1b3553; }
+.mission-name span, .sep { color: #4968cc; }
+.mission-sub { color: #718795; }
+.exam-button { border-color: #5670d0; background: #fff; color: #29478f; box-shadow: 0 6px 16px rgba(54,85,160,.12); border-radius: 8px; }
+.exam-button:hover, .holo-scan-button:hover, .primary-button:hover { background-color: #edf2ff; box-shadow: 0 8px 18px rgba(54,85,160,.16); }
+.met-block { border-right-color: #c9dce7; }
+.met-block strong { color: #1a3150; }
+.eyebrow { color: #708694; }
+.status-pill.green { color: #287f68; background: #e4f5ef; }
+.status-pill.amber { color: #a66a17; background: #fff4dd; }
+.status-pill.cyan { color: #3855ae; background: #e9eeff; }
+.status-pill.red { color: #b54759; background: #ffe9ed; }
+.header-icon, .icon-button { border-color: #c9dce7; color: #5c7180; background: #fff; box-shadow: 0 3px 8px rgba(44,73,104,.06); }
+.header-icon:hover, .icon-button:hover { color: #385fc2; border-color: #8498dd; }
+.notification-dot { color: #fff; background: #d65d6d; box-shadow: 0 3px 8px rgba(214,93,109,.24); }
+.notification-tray { background: #fff; border-color: #b7c9e9; box-shadow: 0 16px 32px rgba(44,73,104,.16); }
+.tray-heading { color: #294362; border-bottom-color: #d8e5ed; }
+.alert-row { border-bottom-color: #e2edf2; }
+.alert-row strong { color: #27415c; }
+.alert-row small { color: #728693; }
+.dashboard-layout { margin-top: 18px; gap: 14px; }
+.left-rail, .hologram-panel, .chat-panel { background: rgba(255,255,255,.9); border-color: #c8dce7; border-radius: 16px; box-shadow: 0 8px 24px rgba(44,73,104,.07); }
+.left-rail { padding: 15px 12px; }
+.rail-caption { color: #8296a3; }
+.nav-item { color: #617684; border-radius: 9px; }
+.nav-item:hover { color: #274c99; background: #f0f4ff; }
+.nav-item.active { color: #315bc2; border-color: #a8bae9; background: linear-gradient(90deg, #e9efff, #f8fbff); box-shadow: inset 3px 0 0 #4f6dd0; }
+.nav-item b { color: #b0751c; border-color: #e8c786; background: #fff8e9; }
+.rail-divider { background: #dce8ee; }
+.upload-panel { border-color: #aebfe3; background: #f0f5ff; border-radius: 12px; }
+.upload-panel:hover, .upload-panel.dragging { border-color: #5872cf; background: #e7eeff; }
+.upload-header { color: #4b67c7; }
+.upload-header .eyebrow { color: #758897; }
+.upload-orb, .upload-spinner { border-color: #5872cf; color: #5872cf; box-shadow: 0 0 18px rgba(88,114,207,.15); }
+.upload-panel > strong { color: #2b4560; }
+.upload-panel > small { color: #708491; }
+.upload-link, .upload-again { color: #3f5ec2; }
+.progress-track { background: #dce6ee; }
+.progress-track span, .big-progress span { background: #526fd1; box-shadow: 0 0 10px rgba(82,111,209,.42); }
+.report-file { border-color: #abd9cb; color: #27866d; }
+.report-file strong { color: #28735f; }
+.rail-footer { color: #718694; }
+.rail-footer button { color: #617684; }
+.rail-footer button:hover { color: #365fc1; }
+.workspace { padding-top: 4px; }
+.section-heading h2 { color: #1b3552; }
+.section-heading p { color: #708491; }
+.grid-meta { color: #81949f; }
+.legend-dot { background: #526fd1; }
+.legend-dot.amber { background: #d28a26; }
+.grid-banner { border-color: #c5d7f0; background: linear-gradient(90deg, #eef4ff, #f8fbfd); border-radius: 12px; }
+.grid-banner strong { color: #36516b; }
+.text-button { color: #4665c4; }
+.text-button:hover { color: #294997; }
+.diagnostic-grid { gap: 9px; }
+.diagnostic-tile { min-height: 136px; border-color: #c9dce7; border-radius: 11px; background: rgba(255,255,255,.92); box-shadow: 0 5px 14px rgba(44,73,104,.06); }
+.diagnostic-tile::after { border-color: currentColor; opacity: .08; }
+.diagnostic-tile:hover { border-color: currentColor; box-shadow: 0 8px 18px rgba(61,95,200,.13); }
+.tile-index { color: #9aabb5; }
+.tile-name { color: #29425b; }
+.tile-category { color: #81939e; }
+.tile-value strong { color: #203d5b; }
+.tile-value span { color: #81939e; }
+.workspace-note { border-top-color: #cbdde7; color: #718592; }
+.workspace-note svg { color: #526fd1; }
+.note-code { color: #8a9da8; }
+.back-link { color: #4261bf; }
+.back-link span { color: #8ba0ac; }
+.hologram-panel, .chat-panel { padding: 13px; }
+.panel-heading h2 { color: #29435d; }
+.panel-live { color: #2c9879; }
+.holo-controls { margin-bottom: 10px; }
+.segmented, .layer-select, .range-switcher { border-color: #c9dce7; background: #f8fbfd; border-radius: 8px; }
+.segmented button, .range-switcher button { color: #718592; }
+.segmented button.active, .range-switcher button.active { color: #3859b5; background: #e8eeff; border-radius: 6px; }
+.layer-select select { color: #526879; }
+.hologram-stage { border-color: #b9cde0; background: radial-gradient(ellipse at 50% 45%, rgba(120,173,208,.2), transparent 54%), repeating-linear-gradient(0deg, transparent 0 25px, rgba(80,125,177,.05) 26px 27px); border-radius: 10px; }
+.hologram-stage::before { border-color: rgba(77,111,168,.14); }
+.holo-grid { opacity: .22; background-image: linear-gradient(rgba(77,111,168,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(77,111,168,.13) 1px, transparent 1px); }
+.holo-selection strong { color: #29435d; }
+.holo-selection small { color: #7d919d; }
+.holo-selection small span { color: #2c9879; }
+.holo-selection button { color: #4665c4; }
+.protocol-inline { border-color: #d7e5eb; }
+.protocol-inline-head { color: #4364c1; }
+.protocol-inline p { color: #667d8c; }
+.holo-scan-button { border-color: #9eb2e3; color: #4665c4; background: #edf2ff; border-radius: 8px; }
+.chat-thread { scrollbar-color: #aebfe0 transparent; }
+.chat-avatar { border-color: #5872cf; color: #4665c4; }
+.chat-message.user .chat-avatar { color: #7569b6; border-color: #9b91d5; }
+.chat-bubble { background: #f0f5fb; border-color: #d2e1e9; }
+.chat-message.user .chat-bubble { background: #f1effc; border-color: #d8d2ef; }
+.chat-bubble p { color: #486274; }
+.chat-bubble time { color: #8a9da8; }
+.chat-compose { border-top-color: #d7e5eb; }
+.compose-row input { border-color: #c9dce7; background: #fff; color: #2c465f; }
+.compose-row input::placeholder { color: #91a2ad; }
+.voice-button, .send-button { border-color: #c9dce7; background: #f8fbfd; color: #617684; }
+.send-button { color: #4665c4; border-color: #9eb2e3; }
+.suggestion-row button { color: #748995; border-color: #cbdde6; }
+.suggestion-row button:hover { color: #4161be; border-color: #9eb2e3; }
+.telemetry-footer { border-top-color: #29438f; background: #172d80; box-shadow: 0 -10px 24px rgba(32,55,130,.22); }
+.telemetry-brand { border-right-color: rgba(255,255,255,.22); }
+.telemetry-brand strong, .telemetry-footer .eyebrow { color: #fff; }
+.telemetry-footer .eyebrow { opacity: .72; }
+.streaming { color: #9ce3cd; }
+.telemetry-card { border-color: rgba(255,255,255,.25); background: rgba(255,255,255,.06); }
+.telemetry-card-head { color: rgba(255,255,255,.76); }
+.telemetry-value strong { color: #fff; }
+.telemetry-value span { color: rgba(255,255,255,.72); }
+.telemetry-state { color: #d4e0ff; }
+.telemetry-card.cyan, .telemetry-card.green, .telemetry-card.amber, .telemetry-card.violet { color: #d4e0ff; }
+.modal-backdrop { background: rgba(37,61,93,.28); }
+.modal { background: #fff; border-color: #aebfe3; box-shadow: 0 20px 60px rgba(44,73,104,.2); border-radius: 16px; }
+.modal-header { border-bottom-color: #d9e6ec; }
+.modal-header h2 { color: #243e59; }
+.measurement-visual, .measurement-instructions, .measurement-result, .vital-chart { border-color: #d0e0e8; background: #f7fbfd; }
+.waveform { color: #526fd1; background: repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(82,111,209,.05) 40px), repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(82,111,209,.05) 40px); }
+.waveform.complete { color: #2c9879; }
+.waveform-axis, .vital-stats span { color: #81939e; }
+.sensor-status { color: #4665c4; }
+.measurement-instructions p, .measurement-result small { color: #617986; }
+.step-list > div { color: #7a8f9b; }
+.step-list > div span { border-color: #cadce5; color: #879aa5; }
+.step-list > div.done { color: #2c9879; }
+.measurement-result > div:first-child strong { color: #29435d; }
+.result-value strong { color: #4665c4; }
+.measurement-note { color: #2c9879; border-color: #b7dfd2; background: #eefaf5; }
+.ghost-button, .primary-button { border-color: #c9dce7; background: #f5f9fc; color: #637987; border-radius: 7px; }
+.ghost-button:hover { color: #3e5fc0; border-color: #9eb2e3; }
+.primary-button { border-color: #7188d8; background: #eaf0ff; color: #3d5fc8; }
+.scan-radar { color: #526fd1; }
+.radar-ring { border-color: rgba(82,111,209,.35); }
+.radar-sweep { background: #526fd1; box-shadow: 0 0 16px rgba(82,111,209,.55); }
+.scan-copy > strong { color: #29435d; }
+.scan-copy > p { color: #6d8290; }
+.big-progress { background: #dce7ee; }
+.scan-stats, .sweep-grid > div { color: #748996; }
+.sweep-grid > div { border-color: #d0e0e8; }
+.sweep-grid > div.cleared { color: #2c9879; border-color: #b9dfd3; background: #effaf6; }
+.vital-hero > div:first-child > strong { color: #29435d; }
+.vital-hero > div:first-child > strong small { color: #7a8d99; }
+.vital-stats { border-color: #d0e0e8; }
+.vital-stats div { border-right-color: #d0e0e8; }
+.vital-stats strong { color: #36516b; }
+.clinical-note { border-left-color: #526fd1; background: #eef3ff; color: #4665c4; }
+.clinical-note p { color: #607987; }
+.chart-tooltip { background: #fff; border-color: #aebfe3; box-shadow: 0 6px 14px rgba(44,73,104,.12); }
+.chart-tooltip span { color: #748995; }
+.chart-tooltip b { color: #29435d; }
+.settings-copy { border-color: #c4d5ee; background: #eef3ff; color: #4665c4; }
+.settings-copy p { color: #617987; }
+.field-label { color: #718592; }
+.field-label input { border-color: #c9dce7; background: #f8fbfd; color: #29435d; }
+.connection-test { border-color: #d5e3ea; }
+.connection-test strong { color: #2c9879; }
+.connection-test small { color: #738893; }
+.profile-card, .protocol-card, .health-stat, .chart-card, .risk-card, .condition-table, .history-table { border-color: #c9dce7; background: rgba(255,255,255,.86); border-radius: 12px; }
+.identity-card { background: radial-gradient(circle at 88% 5%, rgba(91,119,211,.12), transparent 35%), rgba(255,255,255,.9); }
+.profile-avatar { border-color: #5872cf; color: #4665c4; }
+.avatar-orbit { border-color: rgba(88,114,207,.38); }
+.identity-card h3 { color: #29435d; }
+.identity-card p { color: #4665c4; }
+.profile-rank { color: #667e8c; border-bottom-color: #d7e5eb; }
+.profile-id > span, .fact span, .baseline-row span { color: #7c919d; }
+.profile-id strong, .fact strong, .baseline-row strong { color: #29435d; }
+.fact-grid, .fact { border-color: #d7e5eb; }
+.baseline-row { border-bottom-color: #e1ebef; }
+.protocol-card { border-color: #ead5ab; background: linear-gradient(115deg, #fff8e9, #fffdf7); }
+.protocol-icon { color: #c5821e; border-color: #d6a14d; }
+.protocol-card h3 { color: #3d4f5f; }
+.protocol-card p { color: #718491; }
+.health-summary .trajectory { border-color: #b7dfd2; background: linear-gradient(130deg, #effaf6, #fbfefd); }
+.trajectory > strong { color: #2c9879; }
+.trajectory p { color: #6b8290; }
+.health-stat span { color: #6f8491; }
+.health-stat strong, .chart-card-head h3, .risk-card h3 { color: #29435d; }
+.chart-card-head h3 { color: #29435d; }
+.chart-legend, .chart-kpi { color: #486273; }
+.risk-card h3 { color: #29435d; }
+.risk-card > strong { color: #29435d; }
+.risk-card p, .table-row, .history-foot { color: #728794; }
+.table-heading { color: #8396a1; border-bottom-color: #d7e5eb; }
+.table-row { border-bottom-color: #e1ebef; }
+.table-row strong { color: #385269; }
+.search-box { border-color: #c9dce7; color: #6f8491; background: #fff; border-radius: 8px; }
+.search-box input { color: #29435d; }
+.history-table .table-heading { border-bottom-color: #d7e5eb; }
+.history-foot { color: #7d919d; }
+.scan-toast { border-color: #7188d8; background: #fff; color: #4665c4; box-shadow: 0 8px 20px rgba(44,73,104,.14); border-radius: 8px; }
+
+@media (max-width: 720px) {
+  .app-shell { padding-left: 10px; padding-right: 10px; }
+  .topbar { background: rgba(255,255,255,.72); border-radius: 0 0 14px 14px; padding-left: 8px; padding-right: 8px; }
+  .left-rail { box-shadow: 0 6px 18px rgba(44,73,104,.06); }
+  .diagnostic-tile { border-radius: 10px; }
+  .telemetry-footer { background: #172d80; }
+}

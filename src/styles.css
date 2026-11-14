@@ -415,3 +415,14 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline-color:
 .holo-scan-label { color: #4665c4; }
 .scan-line { background: #526fd1; box-shadow: 0 0 15px 4px rgba(82,111,209,.4); }
 @media (max-width: 720px) { .human-scan-figure { inset: 4px 20%; } }
+
+/* Dark sci-fi X-ray treatment from the latest hologram reference. */
+.hologram-stage { background: #02050b; border-color: #1b3767; box-shadow: inset 0 0 34px rgba(17,83,180,.18), 0 0 22px rgba(25,86,190,.08); }
+.hologram-stage::before { border-color: rgba(76,156,255,.22); }
+.holo-grid { opacity: .22; background-image: linear-gradient(rgba(49,111,196,.2) 1px, transparent 1px), linear-gradient(90deg, rgba(49,111,196,.2) 1px, transparent 1px); }
+.human-scan-figure { inset: 4px 11%; }
+.holo-scan-label { color: #83bfff; text-shadow: 0 0 10px rgba(83,164,255,.38); }
+.scan-line { background: #65cfff; box-shadow: 0 0 18px 5px rgba(63,170,255,.58); }
+.body-hit:hover { fill: rgba(83,164,255,.2); stroke: rgba(119,194,255,.9); }
+.body-hit.selected { fill: rgba(61,143,255,.22); stroke: #7dccff; }
+@media (max-width: 720px) { .human-scan-figure { inset: 4px 13%; } }

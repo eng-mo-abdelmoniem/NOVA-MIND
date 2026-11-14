@@ -382,8 +382,8 @@ function HumanHologram3D({ view, layer, scanning }: { view: 'front' | 'back'; la
     resize()
     const observer = new ResizeObserver(resize)
     observer.observe(mount)
-    const color = layer === 'Surface / Wounds' ? 0x6b82ff : layer === 'Organs' ? 0x6877ff : 0x5ca9ff
-    const material = new THREE.MeshStandardMaterial({ color, emissive: layer === 'Skeletal' ? 0x255cff : 0x0b2f9c, emissiveIntensity: scanning ? 2.8 : 1.8, metalness: .18, roughness: .28, transparent: true, opacity: layer === 'Skeletal' ? .8 : .92, wireframe: layer === 'Skeletal' })
+    const color = layer === 'Surface / Wounds' ? 0x8a9dff : layer === 'Organs' ? 0x79a9ff : 0x8fcaff
+    const material = new THREE.MeshStandardMaterial({ color, emissive: layer === 'Skeletal' ? 0x3c7cff : 0x1556d8, emissiveIntensity: scanning ? 3.2 : 2.35, metalness: .12, roughness: .2, transparent: true, opacity: layer === 'Skeletal' ? .86 : .94, wireframe: layer === 'Skeletal' })
     const loader = new GLTFLoader()
     loader.load('/nova-human-hologram-detailed.glb', (gltf) => {
       const model = gltf.scene

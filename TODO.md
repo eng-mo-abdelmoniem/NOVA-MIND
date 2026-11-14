@@ -62,3 +62,9 @@ Validation: `pnpm build` and `git diff --check` pass; the header uses the origin
 - [x] Replace the photo-based branding in project metadata, website header, and browser favicon with the finished logo; provide the standalone PNG and leave the rest of the dashboard unchanged.
 
 Validation: finished 512×512 RGBA PNG is 187,937 bytes with a transparent corner; both storage and metadata HTTPS copies match it byte-for-byte. `pnpm build` and `git diff --check` pass, the restarted Preview returns HTTP 200 with the route manifest, and the desktop rendering shows the converted mark without the photo background. The PNG is raster artwork with a vector-style appearance, not an editable vector file.
+
+## 12. Reduce the live telemetry bar height without removing information
+- [x] Make the bottom LIVE TELEMETRY bar shorter while retaining LIVE TELEMETRY, STREAM / 05, connection status, and all five metric labels, icons, live readings, units, status arrows/text, sparklines, and chart-opening controls.
+- [x] Keep the compact bar readable without overlaps or clipping; preserve access to every item on smaller screens and reclaim the corresponding main-content space.
+
+Validation: scoped CSS sets a 68px minimum bar height with compact three-row cards and no hidden fields; the footer component and its live-data/chart-opening logic are unchanged. `pnpm build` and `git diff --check` pass. Desktop 1440×900 rendering shows the complete stream identity and all five metrics without overlap; mobile 390×844 rendering keeps the full stream identity and readable cards in a horizontal strip. Content and floating controls reserve space above the bar, including safe-area and narrow-screen scrollbar allowances.

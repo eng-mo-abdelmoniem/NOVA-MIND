@@ -422,3 +422,47 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline-color:
 .hologram-model-status.error button { margin-top: 4px; border: 1px solid rgba(105,169,255,.45); padding: 7px 10px; background: rgba(48,94,163,.18); color: #a9ceff; font: 700 9px var(--heading); letter-spacing: .1em; }
 .hologram-model-status.error button:hover { border-color: #83bbff; background: rgba(48,94,163,.32); }
 @keyframes hologramLoad { from { transform: translateX(-35%); } to { transform: translateX(220%); } }
+
+/* Compact live telemetry: retain every field while reclaiming dashboard space. */
+:root { --telemetry-bar-height: 68px; }
+.app-shell { padding-bottom: calc(var(--telemetry-bar-height) + 12px + env(safe-area-inset-bottom, 0px)); }
+.telemetry-footer {
+  min-height: var(--telemetry-bar-height);
+  padding-top: 4px;
+  padding-bottom: calc(4px + env(safe-area-inset-bottom, 0px));
+  align-items: stretch;
+}
+.telemetry-brand { display: flex; flex-direction: column; justify-content: center; gap: 2px; padding-top: 2px; padding-bottom: 2px; }
+.telemetry-brand .eyebrow { line-height: 12px; }
+.telemetry-brand strong { margin-top: 0; line-height: 16px; }
+.telemetry-brand .streaming { margin-top: 0; line-height: 12px; white-space: nowrap; }
+.telemetry-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 52px;
+  gap: 1px 6px;
+  align-content: center;
+  padding: 4px 8px;
+}
+.telemetry-card-head { grid-column: 1 / -1; min-height: 14px; line-height: 14px; }
+.telemetry-card-head span { white-space: nowrap; }
+.telemetry-card-head svg { width: 12px; height: 12px; flex: 0 0 auto; }
+.telemetry-value { grid-column: 1 / -1; margin-top: 0; align-items: baseline; }
+.telemetry-value strong { font-size: 20px; line-height: 20px; }
+.telemetry-value span { line-height: 14px; }
+.telemetry-state { grid-column: 1; margin-top: 0; min-height: 12px; line-height: 12px; letter-spacing: .06em; white-space: nowrap; }
+.telemetry-card .mini-spark { position: static; grid-column: 2; grid-row: 3; width: 52px; height: 14px; align-self: center; justify-self: end; }
+.chat-fab, .chat-popover, .scan-toast { bottom: calc(var(--telemetry-bar-height) + 14px + env(safe-area-inset-bottom, 0px)); }
+@media (max-width: 1080px) {
+  .telemetry-footer {
+    grid-template-columns: 140px repeat(5, minmax(164px, 1fr));
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: thin;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .telemetry-brand { display: flex; }
+  .telemetry-card { min-width: 164px; }
+  .app-shell { padding-bottom: calc(var(--telemetry-bar-height) + 20px + env(safe-area-inset-bottom, 0px)); }
+  .chat-fab, .chat-popover, .scan-toast { bottom: calc(var(--telemetry-bar-height) + 20px + env(safe-area-inset-bottom, 0px)); }
+}

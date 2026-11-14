@@ -10,7 +10,7 @@ A single-screen Nova Mind astronaut medical command center that runs convincingl
 - Keep the data model local and deterministic enough for the UI to feel live: telemetry fluctuates on a timer, charts use seeded orbital-health series, and every action updates chat history or status indicators.
 - Centralize backend connectivity in `src/services/aiBridge.ts`, with graceful fallback to local simulation for chat, diagnostics, uploads, hologram inspection, and telemetry.
 - Centralize UI command execution in `src/context/HudCommandContext.tsx`; chat, tile actions, hologram actions, and footer vital cards dispatch through the same command surface.
-- Use lightweight inline SVG and CSS for the anatomical hologram and waveform treatment; avoid extra image assets so the interface remains crisp and fast.
+- Use a generated untextured GLB rendered through Three.js for the anatomical hologram, with a blue emissive material, front/back rotation, layer-dependent material treatment, and an SVG hit-map overlay for precise body-region interactions.
 - Serve `public/manus-routes.json` with the single `/` route.
 
 ## Project structure

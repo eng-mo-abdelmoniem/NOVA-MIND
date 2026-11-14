@@ -402,3 +402,7 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline-color:
 .human-scan-figure img { mix-blend-mode: normal; filter: saturate(.82) hue-rotate(150deg) brightness(1.04); }
 .human-scan-figure.skeletal img { filter: saturate(.35) hue-rotate(150deg) brightness(1.1) contrast(1.08); }
 .human-scan-figure.surface-wounds img { filter: saturate(.9) hue-rotate(150deg) brightness(1.04); }
+
+/* Interactive 3D hologram surface. */
+.hologram-3d-canvas { position: absolute; inset: 0; pointer-events: none; }
+.hologram-3d-canvas canvas { display: block; width: 100%; height: 100%; }

@@ -12,6 +12,7 @@ type ModelResources = { geometries: Set<THREE.BufferGeometry>; materials: Set<TH
 // its own disposable scene/material/texture instances while the original parsed asset stays cached.
 const gltfLoads = new Map<string, LoadEntry>()
 let referenceTexturePromise: Promise<THREE.Texture> | null = null
+let posteriorTexturePromise: Promise<THREE.Texture> | null = null
 
 function getReferenceTexture() {
   if (!referenceTexturePromise) {
@@ -24,6 +25,19 @@ function getReferenceTexture() {
     })
   }
   return referenceTexturePromise
+}
+
+function getPosteriorTexture() {
+  if (!posteriorTexturePromise) {
+    posteriorTexturePromise = new THREE.TextureLoader().loadAsync('/ares-human-hologram-rear-reference.png').then((texture) => {
+      texture.colorSpace = THREE.SRGBColorSpace
+      return texture
+    }).catch((error: unknown) => {
+      posteriorTexturePromise = null
+      throw error
+    })
+  }
+  return posteriorTexturePromise
 }
 
 function getGLTF(url: string, onProgress: (event: ProgressEvent) => void): { promise: Promise<GLTF>; unsubscribe: () => void } {
@@ -59,7 +73,7 @@ function disposeResources(resources: ModelResources | null) {
   resources.textures.clear()
 }
 
-function makeViewerScene(source: THREE.Group, referenceTexture: THREE.Texture): { model: THREE.Group; resources: ModelResources } {
+function makeViewerScene(source: THREE.Group, referenceTexture: THREE.Texture, posteriorTexture: THREE.Texture): { model: THREE.Group; resources: ModelResources } {
   const model = source.clone(true)
   const resources: ModelResources = { geometries: new Set(), materials: new Set(), textures: new Set() }
   const textureClones = new Map<THREE.Texture, THREE.Texture>()
@@ -75,6 +89,7 @@ function makeViewerScene(source: THREE.Group, referenceTexture: THREE.Texture): 
     return clone
   }
   const referenceMap = cloneTexture(referenceTexture)
+  const posteriorMap = cloneTexture(posteriorTexture)
   const makeUnlitMaterial = (sourceMaterial: THREE.Material, bounds: THREE.Box3) => {
     const pbr = sourceMaterial as THREE.MeshStandardMaterial
     const baseColor = pbr.map ? new THREE.Color(0xffffff) : (pbr.color?.clone() ?? new THREE.Color(0xffffff))
@@ -99,30 +114,41 @@ function makeViewerScene(source: THREE.Group, referenceTexture: THREE.Texture): 
       wireframe: false,
       toneMapped: false,
     })
-    // The generated mesh faces +X. Project the authoritative source artwork onto its front,
-    // not onto a billboard; the generated UV texture stays attached to side/back geometry.
+    // The generated mesh faces +X. Project the authoritative source and matching posterior art
+    // onto opposite surfaces of this same mesh; this is not a pair of view-dependent billboards.
     const size = bounds.getSize(new THREE.Vector3())
     material.onBeforeCompile = (shader) => {
       shader.uniforms.referenceMap = { value: referenceMap }
+      shader.uniforms.posteriorMap = { value: posteriorMap }
       shader.uniforms.referenceBounds = { value: new THREE.Vector4(bounds.min.z, size.z, bounds.min.y, size.y) }
       shader.uniforms.referenceImageBounds = { value: new THREE.Vector4(190 / 1365, 88 / 2048, 968 / 1365, 1929 / 2048) }
+      shader.uniforms.posteriorImageBounds = { value: new THREE.Vector4(213 / 1536, 38 / 2304, 1099 / 1536, 2152 / 2304) }
       shader.vertexShader = shader.vertexShader.replace('#include <common>', `#include <common>
 uniform vec4 referenceBounds;
 uniform vec4 referenceImageBounds;
+uniform vec4 posteriorImageBounds;
 varying vec2 vReferenceUv;
+varying vec2 vPosteriorUv;
 varying float vReferenceFacing;`)
       shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', `#include <begin_vertex>
 vReferenceUv = vec2(1.0 - (position.z - referenceBounds.x) / referenceBounds.y, (position.y - referenceBounds.z) / referenceBounds.w);
 vReferenceUv = referenceImageBounds.xy + vReferenceUv * referenceImageBounds.zw;
+vPosteriorUv = vec2((position.z - referenceBounds.x) / referenceBounds.y, (position.y - referenceBounds.z) / referenceBounds.w);
+vPosteriorUv = posteriorImageBounds.xy + vPosteriorUv * posteriorImageBounds.zw;
 vReferenceFacing = normal.x;`)
       shader.fragmentShader = shader.fragmentShader.replace('#include <common>', `#include <common>
 uniform sampler2D referenceMap;
+uniform sampler2D posteriorMap;
 varying vec2 vReferenceUv;
+varying vec2 vPosteriorUv;
 varying float vReferenceFacing;`)
       shader.fragmentShader = shader.fragmentShader.replace('#include <map_fragment>', `#include <map_fragment>
 vec4 referenceColor = texture2D(referenceMap, vReferenceUv);
+vec4 posteriorColor = texture2D(posteriorMap, vPosteriorUv);
 float frontBlend = smoothstep(0.05, 0.4, vReferenceFacing);
-diffuseColor.rgb = mix(diffuseColor.rgb * 2.0, referenceColor.rgb, frontBlend);`)
+float posteriorBlend = smoothstep(0.05, 0.4, -vReferenceFacing) * posteriorColor.a;
+diffuseColor.rgb = mix(diffuseColor.rgb * 2.0, referenceColor.rgb, frontBlend);
+diffuseColor.rgb = mix(diffuseColor.rgb, posteriorColor.rgb, posteriorBlend);`)
     }
     material.customProgramCacheKey = () => 'ares-reference-projection-v1'
     material.userData.hologramBaseOpacity = pbr.opacity
@@ -298,9 +324,9 @@ export default function HumanHologram3D({ view, layer, scanning }: ViewerProps) 
     modelSizeRef.current = null
 
     const request = getGLTF(HOLOGRAM_MODEL_URL, progress)
-    Promise.all([request.promise, getReferenceTexture()]).then(([gltf, referenceTexture]) => {
+    Promise.all([request.promise, getReferenceTexture(), getPosteriorTexture()]).then(([gltf, referenceTexture, posteriorTexture]) => {
       if (!active || token !== loadTokenRef.current || !rendererRef.current || !viewerGroupRef.current) return
-      const { model, resources } = makeViewerScene(gltf.scene, referenceTexture)
+      const { model, resources } = makeViewerScene(gltf.scene, referenceTexture, posteriorTexture)
       // The image-to-3D export faces +X; the scanner camera looks down -Z.
       model.rotation.y -= Math.PI / 2
       model.updateMatrixWorld(true)

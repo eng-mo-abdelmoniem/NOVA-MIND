@@ -3,5 +3,5 @@ dist/
 .vite/
 .DS_Store
 
-# Generated source assets remain local; website-ready assets are in public/.
-/assets/*.glb
+# Generated source assets remain local; website-ready assets are in public.
+/assets/

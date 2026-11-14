@@ -34,3 +34,11 @@
 - [x] Ship the generated model at a same-origin static website path so the browser’s GLTF loader can fetch it reliably; show explicit loading/error states, dispose rendering resources safely, and checkpoint the delivered change. Preserve existing Auto Publish authorization.
 
 Validation: exact-source front artwork projected on actual image-derived geometry; successful full-body scanner rendering; `pnpm build` and `git diff --check` pass; focused read-only review passes. Side/back anatomy is inferred and layers remain display presets.
+
+## 8. Deliver consistent 360-degree front/back studio presentation
+- [x] Use the subject “full-body blue X-ray human anatomy hologram” for the supplied `[اسم النموذج هنا]` placeholder; maintain the same complete-body proportions, pose, icy-blue palette, and photorealistic X-ray material in both front and posterior views.
+- [x] Keep front/back views on the same continuous 3D geometry and topology with correctly oriented matching X-ray artwork on front and rear surfaces, rather than rendering a blank silhouette on the rear.
+- [x] Use a pure white `#FFFFFF` anatomical viewport background, no background shadow, crisp edges, and detailed texture in the site’s model view.
+- [ ] Soft even studio lighting: the current display preserves texture-baked shading through an unlit material; it does not implement a physically lit studio setup.
+
+Validation: built successfully; screenshot checks show the full-body front art and an anatomically detailed posterior view on the same model with the white studio field.

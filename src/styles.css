@@ -365,3 +365,15 @@ button:focus-visible, input:focus-visible, select:focus-visible { outline-color:
   .right-rail > .hologram-panel { min-height: auto; }
   .right-rail .hologram-stage { height: 300px; }
 }
+
+/* Real-human hologram layer: the SVG remains only as an invisible interaction map. */
+.human-scan-figure { position: absolute; inset: 5px 12%; display: grid; place-items: center; pointer-events: none; }
+.human-scan-figure img { width: 100%; height: 100%; object-fit: contain; opacity: .9; filter: saturate(.7) hue-rotate(150deg) brightness(1.08) drop-shadow(0 0 10px rgba(61,95,200,.42)); mix-blend-mode: multiply; }
+.human-scan-figure.back img, .human-scan-figure.back .body-hit-map { transform: scaleX(-1); }
+.human-scan-figure.skeletal img { filter: saturate(.2) hue-rotate(145deg) brightness(1.2) contrast(1.15) drop-shadow(0 0 12px rgba(61,95,200,.5)); }
+.human-scan-figure.organs::after { content: ''; position: absolute; inset: 24% 26% 34%; border-radius: 45%; background: radial-gradient(ellipse at 48% 40%, rgba(210,138,38,.28), transparent 18%), radial-gradient(ellipse at 37% 52%, rgba(109,97,177,.24), transparent 21%), radial-gradient(ellipse at 63% 52%, rgba(109,97,177,.24), transparent 21%); mix-blend-mode: screen; }
+.human-scan-figure.surface-wounds img { filter: saturate(.9) hue-rotate(145deg) brightness(1.08) drop-shadow(0 0 11px rgba(214,93,109,.35)); }
+.body-hit-map { position: absolute; inset: 4% 17%; width: 66%; height: 92%; overflow: visible; pointer-events: auto; }
+.body-hit { fill: rgba(61,95,200,.005); stroke: transparent; cursor: pointer; transition: .18s; }
+.body-hit:hover { fill: rgba(61,95,200,.2); stroke: rgba(61,95,200,.7); }
+.body-hit.selected { fill: rgba(210,138,38,.18); stroke: #d28a26; stroke-width: .7; filter: url(#glow); animation: selectedPulse 1.7s ease-in-out infinite; }

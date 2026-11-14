@@ -16,7 +16,7 @@
 - History must provide 24-hour/7-day switching, search/filter, structured medical logs, and a working JSON/CSV export.
 
 ## 4. Deliver the anatomical hologram and protocol interactions
-- Show a cyan holographic human figure with front/back toggle, Full Body/Skeletal/Organs/Surface-Wounds layers, clickable major body regions, highlight/focus state, first-aid protocol card, and Holographic Human Body Analysis scan.
+- Show a realistic full-body human medical-scan hologram with cyan/indigo treatment, front/back toggle, Full Body/Skeletal/Organs/Surface-Wounds layers, clickable major body regions, highlight/focus state, first-aid protocol card, and Holographic Human Body Analysis scan.
 - Clicking a body region must notify the chat context and surface a specific zero-G first-aid protocol.
 
 ## 5. Deliver upload, chat, telemetry, and settings behaviors

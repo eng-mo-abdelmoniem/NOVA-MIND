@@ -48,6 +48,7 @@ function App() {
   const [hologramLayer, setHologramLayer] = useState('Full Body')
   const [scanProgress, setScanProgress] = useState<number | null>(null)
   const [notificationsOpen, setNotificationsOpen] = useState(false)
+  const [chatOpen, setChatOpen] = useState(false)
   const [chatInput, setChatInput] = useState('')
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
     { id: 1, role: 'assistant', text: 'ARES-IV Flight Surgeon online. Primary life-support biometrics are stable. What should I inspect?', time: '14:24:10' },
@@ -266,7 +267,6 @@ function App() {
         {activeTab === 'health' && <HealthWorkspace range={healthRange} onRangeChange={setHealthRange} />}
         {activeTab === 'chronic' && <ChronicWorkspace />}
         {activeTab === 'history' && <HistoryWorkspace query={historyQuery} onQuery={setHistoryQuery} range={historyRange} onRange={setHistoryRange} rows={filteredLog} onExport={exportLog} />}
-        <ChatPanel messages={chatMessages} value={chatInput} onChange={setChatInput} onSubmit={handleChat} onVoice={startVoice} listening={isListening} onInfo={() => addMessage('assistant', 'Command help: try “Open ECG test”, “Show my heart rate history”, “Check my left arm”, “Show chronic diseases”, or “Run full scan”.', 'system')} />
       </main>
 
       <aside className="right-rail">
@@ -274,6 +274,8 @@ function App() {
       </aside>
     </div>
 
+    {chatOpen && <div className="chat-popover"><button className="chat-popover-close" aria-label="Close Flight Surgeon" onClick={() => setChatOpen(false)}><X size={15} /></button><ChatPanel messages={chatMessages} value={chatInput} onChange={setChatInput} onSubmit={handleChat} onVoice={startVoice} listening={isListening} onInfo={() => addMessage('assistant', 'Command help: try “Open ECG test”, “Show my heart rate history”, “Check my left arm”, “Show chronic diseases”, or “Run full scan”.', 'system')} /></div>}
+    <button className={`chat-fab ${chatOpen ? 'active' : ''}`} aria-label={chatOpen ? 'Close Flight Surgeon' : 'Open Flight Surgeon'} aria-expanded={chatOpen} onClick={() => setChatOpen((value) => !value)}><Sparkles size={20} /><span className="chat-fab-pulse" /><strong>AI</strong></button>
     <TelemetryFooter telemetry={telemetry} onOpen={openVital} online={bridgeOnline} />
 
     {modal?.type === 'test' && currentTest && <MeasurementModal test={currentTest} onClose={() => setModal(null)} onSend={async (text) => { addMessage('user', text); const response = await sendChatToCustomAI(text, { telemetry, selectedBodyPart: selectedPart }); addMessage('assistant', response.reply, 'system'); executeAIResponse(response); setModal(null) }} />}
@@ -348,7 +350,7 @@ function HistoryWorkspace({ query, onQuery, range, onRange, rows, onExport }: { 
 function HologramPanel({ view, layer, selectedPart, scanning, onView, onLayer, onPart, onScan }: { view: 'front' | 'back'; layer: string; selectedPart: string; scanning: boolean; onView: (view: 'front' | 'back') => void; onLayer: (layer: string) => void; onPart: (part: string) => void; onScan: () => void }) {
   const selected = bodyParts.find((part) => part.id === selectedPart) ?? bodyParts[5]
   return <section className="hologram-panel"><div className="panel-heading"><div><span className="eyebrow">AI MEDICAL HOLOGRAM</span><h2>ANATOMICAL GUIDE</h2></div><span className="panel-live"><span className="status-dot" /> LIVE</span></div><div className="holo-controls"><div className="segmented"><button className={view === 'front' ? 'active' : ''} onClick={() => onView('front')}>FRONT</button><button className={view === 'back' ? 'active' : ''} onClick={() => onView('back')}>BACK</button></div><div className="layer-select"><Layers3 size={13} /><select value={layer} onChange={(event) => onLayer(event.target.value)}><option>Full Body</option><option>Skeletal</option><option>Organs</option><option>Surface / Wounds</option></select><ChevronDown size={12} /></div></div><div className={`hologram-stage ${scanning ? 'scanning' : ''}`}><div className="holo-grid" /><div className="scan-line" /><div className={`human-scan-figure ${view} ${layer === 'Skeletal' ? 'skeletal' : ''} ${layer === 'Organs' ? 'organs' : ''} ${layer === 'Surface / Wounds' ? 'surface-wounds' : ''}`}>
-  <img src="/manus-storage/async-images/I2AW9xx1ETlwMBspFYG82E/image-1.webp" alt="Realistic human medical hologram" />
+  <img src="/ares-human-hologram-v2.png" alt="Realistic human medical hologram" />
   <div className="anatomy-scan-overlay" aria-hidden="true" />
   <svg className="body-hit-map" viewBox="0 0 100 126" role="img" aria-label="Interactive human body regions">
     {bodyParts.map((part) => <rect key={part.id} className={`body-hit ${part.id === selectedPart ? 'selected' : ''}`} x={part.x - part.width / 2} y={part.y - part.height / 2} width={part.width} height={part.height} rx="2" onClick={() => onPart(part.id)} />)}

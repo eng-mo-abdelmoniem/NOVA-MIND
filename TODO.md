@@ -2,7 +2,7 @@
 
 ## 1. Build the single-view clinical aerospace shell
 - Deliver a bright pale-blue clinical console inspired by the supplied reference, with rounded white diagnostic cards, restrained indigo navigation accents, amber watch states, crimson critical states, a subtle orbital background, Rajdhani/Inter typography, mission badge, live MET clock, AI Flight Surgeon status, notifications, and settings controls.
-- Keep the layout responsive across desktop and mobile while preserving the left command rail, center six-column diagnostic workspace with the Flight Surgeon docked directly underneath, dedicated right hologram/scan tower, and fixed indigo telemetry footer hierarchy.
+- Keep the layout responsive across desktop and mobile while preserving the left command rail, center six-column diagnostic workspace, dedicated right hologram/scan tower, floating Flight Surgeon launcher/popup, and fixed indigo telemetry footer hierarchy.
 
 ## 2. Deliver the diagnostic measurement grid and full-system scan
 - Show the exact 18 unique tiles: Blood Test, Urine Test, Saliva Test, Sweat Test, Immune Panel, DNA / Microbe Test, Ultrasound, X-Ray, Eye & Vision (SANS), Bone Density, Blood Pressure, ECG, Oxygen Saturation, Temp & Breathing, Muscle Mass, Radiation Bio-Scan, Skin / Wound Scan, and IV Fluid & Hydration.
@@ -21,7 +21,7 @@
 
 ## 5. Deliver upload, chat, telemetry, and settings behaviors
 - Accept PDF/JPG/PNG/DICOM uploads via drag-and-drop or file picker, show AI Vision & OCR progress, preview the file, extract simulated findings, and inject the report into chat context.
-- Provide a Flight Surgeon chat directly beneath the active center workspace with timestamps, text send, voice-input control, and command parsing for navigation, tests, vital modals, hologram highlighting, and full scans.
+- Provide a floating Flight Surgeon launcher that opens a popup chat with timestamps, text send, voice-input control, and command parsing for navigation, tests, vital modals, hologram highlighting, and full scans.
 - Provide five live telemetry cards for glucose, oxygen, heart rate, blood pressure, and radiation, each with 24-hour/7-day chart modal, stats, and clinical notes.
 - Persist editable FastAPI and WebSocket URLs in localStorage and expose centralized bridge methods with local simulation fallback.
 

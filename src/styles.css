@@ -38,7 +38,7 @@ button { cursor: pointer; }
 .topbar { min-height: 74px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .mission-lockup, .top-actions, .mission-sub, .exam-button, .status-pill, .header-icon, .section-heading, .grid-meta, .grid-banner, .text-button, .upload-header, .rail-footer, .panel-heading, .holo-controls, .segmented, .layer-select, .holo-selection, .selection-marker, .protocol-inline-head, .holo-scan-button, .chat-compose, .compose-row, .suggestion-row, .telemetry-card-head, .telemetry-value, .telemetry-state, .modal-header, .modal-actions, .scan-stats, .settings-copy, .connection-test, .export-actions, .history-toolbar, .history-foot { display: flex; align-items: center; }
 .mission-lockup { gap: 12px; min-width: 255px; }
-.nova-brand-mark { display: block; width: 42px; height: 46px; flex: 0 0 auto; object-fit: contain; box-shadow: 0 4px 14px rgba(61,95,200,.12); }
+.nova-brand-mark { display: block; width: 42px; height: 42px; flex: 0 0 auto; object-fit: contain; }
 .mission-name { font: 700 14px var(--heading); letter-spacing: .11em; color: #effaff; white-space: nowrap; }
 .mission-name span { color: var(--cyan); margin: 0 4px; }
 .mission-sub { font-size: 9px; color: var(--muted); letter-spacing: .11em; margin-top: 3px; }

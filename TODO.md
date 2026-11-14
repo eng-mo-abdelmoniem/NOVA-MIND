@@ -56,3 +56,9 @@ Validation: production build and strict TypeScript checks pass; all 17 rule-engi
 - [x] Use the same supplied image for the website's header logo and browser favicon without changing the rest of the dashboard or existing integrations.
 
 Validation: `pnpm build` and `git diff --check` pass; the header uses the original uploaded image with `object-fit: contain`, and project metadata references a durable public HTTPS copy.
+
+## 11. Convert the logo photo into a clean digital logo
+- [x] Turn the supplied image into a clean, vector-style transparent logo, preserving its blue orbital rings, small blue sphere, and centered gold four-point star.
+- [x] Replace the photo-based branding in project metadata, website header, and browser favicon with the finished logo; provide the standalone PNG and leave the rest of the dashboard unchanged.
+
+Validation: finished 512×512 RGBA PNG is 187,937 bytes with a transparent corner; both storage and metadata HTTPS copies match it byte-for-byte. `pnpm build` and `git diff --check` pass, the restarted Preview returns HTTP 200 with the route manifest, and the desktop rendering shows the converted mark without the photo background. The PNG is raster artwork with a vector-style appearance, not an editable vector file.

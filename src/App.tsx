@@ -235,7 +235,7 @@ function App() {
     <Starfield />
     <header className="topbar">
       <div className="mission-lockup">
-        <img className="nova-brand-mark" src="/manus-storage/WhatsAppImage2026-11-14at10.39.14AM_09bfa7c6.jpeg" alt="Nova Mind logo" width="42" height="46" />
+        <img className="nova-brand-mark" src="/manus-storage/nova-mind-logo-512_e86fb201.png" alt="Nova Mind logo" width="42" height="42" />
         <div><div className="mission-name">NOVA MIND <span>//</span> ORBITAL MED-BAY</div><div className="mission-sub">AUTONOMOUS CREW HEALTH DECK <span className="sep">·</span> MISSION DAY 142</div></div>
       </div>
       <button className="exam-button" onClick={runFullScan}><ScanLine size={18} /><span>REQUEST MEDICAL EXAM</span><ArrowUpRight size={15} /></button>
